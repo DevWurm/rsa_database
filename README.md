@@ -37,7 +37,7 @@ A more detailed documentation and additional information will be offered in the 
 + <a href="https://github.com/kkegel/">kkegel</a> (email: <a href"mailto:karlkegel9817@gmail.com">karlkegel9817@gmail.com</a>)
 
 #### Frontend development
-+ <a href="https://github.com/tarek96/">tarek96</a> (email: <a href"mailto:"></a>)
++ <a href="https://github.com/tarek96/">tarek96</a> (email: <a href"mailto:Darius.Knauer@web.de">Darius.Knauer@web.de</a>)
 + <a href="https://github.com/vgerber/">vgerber</a> (email: <a href"mailto:VG-Development@web.de">VG-Development@web.de</a>)
 
 #### Key generation, encryption/decryption algorithms
