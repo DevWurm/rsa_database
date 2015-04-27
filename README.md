@@ -30,7 +30,7 @@ A more detailed documentation and additional information will be offered in the 
 ## Authors
 
 #### Database and database connection
-+ <a href="https://github.com/mjoest/">mjoest</a> (email: <a href"mailto: "> </a>)
++ <a href="https://github.com/mjoest/">mjoest</a> (email: <a href"mailto:michael_joest@web.de">michael_joest@web.de</a>)
 + <a href="https://github.com/Tolator/">Tolator</a> (email: <a href"mailto:fresh.r12@googlemail.com">fresh.r12@googlemail.com</a>)
 
 #### Hash generation
