@@ -30,19 +30,19 @@ A more detailed documentation and additional information will be offered in the 
 ## Authors
 
 #### Database and database connection
-+ <a href="https://github.com/mjoest/">mjoest</a> (email: <a href"mailto: "> </a>
-+ <a href="https://github.com/Tolator/">Tolator</a> (email: <a href"mailto:fresh.r12@googlemail.com">fresh.r12@googlemail.com</a>
++ <a href="https://github.com/mjoest/">mjoest</a> (email: <a href"mailto: "> </a>)
++ <a href="https://github.com/Tolator/">Tolator</a> (email: <a href"mailto:fresh.r12@googlemail.com">fresh.r12@googlemail.com</a>)
 
 #### Hash generation
-+ <a href="https://github.com/kkegel/">kkegel</a> (email: <a href"mailto:karlkegel9817@gmail.com">karlkegel9817@gmail.com</a>
++ <a href="https://github.com/kkegel/">kkegel</a> (email: <a href"mailto:karlkegel9817@gmail.com">karlkegel9817@gmail.com</a>)
 
 #### Frontend development
-+ <a href="https://github.com/tarek96/">tarek96</a> (email: <a href"mailto:"></a>
-+ <a href="https://github.com/vgerber/">vgerber</a> (email: <a href"mailto:VG-Development@web.de">VG-Development@web.de</a>
++ <a href="https://github.com/tarek96/">tarek96</a> (email: <a href"mailto:"></a>)
++ <a href="https://github.com/vgerber/">vgerber</a> (email: <a href"mailto:VG-Development@web.de">VG-Development@web.de</a>)
 
 #### Key generation, encryption/decryption algorithms
-+ <a href="https://github.com/DevWurm/">DevWurm</a> (email: <a href"mailto:devwurm@gmx.net">devwurm@gmx.net</a>
-+ <a href="https://github.com/Enceladus-2">Enceladus-2</a> (email: <a href"mailto:enceladus.2.89@gmail.com">enceladus.2.89@gmail.com</a>
++ <a href="https://github.com/DevWurm/">DevWurm</a> (email: <a href"mailto:devwurm@gmx.net">devwurm@gmx.net</a>)
++ <a href="https://github.com/Enceladus-2">Enceladus-2</a> (email: <a href"mailto:enceladus.2.89@gmail.com">enceladus.2.89@gmail.com</a>)
 
 ## Bugs & Feature Requests
 + use the GitHub Issue Tracker for submitting bugs and feature requests
