@@ -1,0 +1,3 @@
+#Standard Aptana files, not to be included into Repo
+.settings/**
+.project
