@@ -1,10 +1,10 @@
 # rsa_database
-An demonstrative RSA encrypted web database system. In this project you can see the process of creating RSA key pairs, 
-encrypt user data with the public key, store them into database and read/edit/delete them from the database with the private 
+A demonstrative RSA encrypted web database system. In this project you can see the process of creating RSA key pairs, 
+encrypt user data with the public key, store them into database and read, edit and delete them from the database with the private 
 key in principle.
 
 ## Disclaimer
-The algorithms and processes are created just for demonstrative purposes. The length of the keys, the algorithms and the
+The algorithms and processes are only created for demonstrative purposes. The length of the keys, the algorithms and the
 access management are not meeting the demand of commercial or security relevant purposes.
 
 ## Repository structure
@@ -47,12 +47,12 @@ A more detailed documentation and additional information will be offered in the 
 ## Bugs & Feature Requests
 + use the GitHub Issue Tracker for submitting bugs and feature requests
 + or try to figure out in which field your advice is concerning and write a mail to one of the authors in this field
-+ or write a mail to <a href"mailto:devwurm@gmx.net">devwurm@gmx.net</a> if you have no idea, who is responsible for your request
++ or write a mail to <a href"mailto:devwurm@gmx.net">devwurm@gmx.net</a> if you have no idea who is responsible for your request
 
 ## Collaborating
 + submit bugs and feature requests
 + fork the project
-+ create pull requests to merge your canges into our project
++ create pull requests to merge your changes into our project
 + write a mail with your changes or ideas to one of the authors in the regarding field or to <a href"mailto:devwurm@gmx.net">devwurm@gmx.net</a>
 
 ## Contact
