@@ -9,8 +9,12 @@ function encode ($array, $pubkeye, $pubkeyN) { //rsa encode array with public ke
 	return $encoded;
 }
 
-function decode ($array, $privd, $pubkeyN) { //rsa decode array with privat key d and public key N
-	
+function decode ($array, $privkeyd, $pubkeyN) { //rsa decode array with privat key d and public key N
+	$decoded = array();
+	foreach ($array as $k) {
+		$k = mod($k, $privkeyd, $pubkeyN);
+	}
+	return $decoded;
 }
 
 function mod ($basis, $exponent, $n) { //returns the result of basis^exponent modulo n
