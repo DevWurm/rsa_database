@@ -2,3 +2,6 @@
 .settings/**
 .project
 test/**
+
+#MacOS Files
+**/.DS_Store
