@@ -2,8 +2,8 @@
 /*
  * Author : Karl Kegel
  */
-   include 'numberOperations.php';
-   include 'bigNumbers.php';
+   include_once 'numberOperations.php';
+   include_once 'bigNumbers.php';
    //the executable funktion is createHash($chain) 
    //all other functions can bee used too, but are in main purposes help functions
    
