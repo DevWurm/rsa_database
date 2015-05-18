@@ -35,8 +35,9 @@
 	    Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
 */
 
-include_once('read_config.php');
-include_once('get_post.php');
+include_once 'read_config.php';
+include_once 'get_post.php';
+include_once 'crypt_data.php';
  
 function connect_db() {
 	$config = read_config(); //get config data
@@ -58,6 +59,7 @@ function connect_db() {
 function change_user(){
 	$change_data = get_change_data();
 	$db_link = connect_db(); //connect to database
+	$change_data = encrypt_user_data($change_data, $pubkeye, $pubkeyN);
 	$query = "UPDATE user SET 
 			firstname='".$change_data['firstname']."', 
 			lastname='".$change_data['lastname']."', 
@@ -89,6 +91,7 @@ function insert_keys() {
 function insert_user() {
 	$insert_data = get_insert_data();
 	$db_link = connect_db();
+	$insert_data = encrypt_user_data($insert_data, $pubkeye, $pubkeyN);
 	$query = "INSERT INTO 
 			user(firstname, lastname, date_of_birth, zip, city, street, 
 			number, tel, email) 
