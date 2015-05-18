@@ -35,11 +35,20 @@
 	    Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
 */
 
-include_once "converter.php" ;
+include_once("converter.php");
 
 
-function mod ($basis, $exponent, $n) { //returns the result of basis^exponent modulo n
-	
+function mod ($basis, $exponent, $mod) { //returns the result of basis^exponent modulo mod
+    $result = 1;
+    while ($exponent > 0) {
+     while (bcmod($exponent, 2) == 0) {
+      $exponent = $exponent / 2;
+      $basis = bcmod($basis * $basis, $mod);
+     }
+     $exponent = $exponent - 1;
+     $result = bcmod($result * $basis, $mod);
+    }
+    return $result;		
 }
 
 function encode ($array, $key, $keyN) { //rsa encode array with public keys e and N; decode must be include separetly 

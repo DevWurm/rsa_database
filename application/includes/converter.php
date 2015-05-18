@@ -1,5 +1,5 @@
 <?php
-  /*
+ /*
 	 * License
 	 
 	 * Copyright 2015 DevWurm Enceladus-2, kkegel, mjoest, tarek96, Tolator and vgerber. 
@@ -34,7 +34,7 @@
 	    Sie sollten eine Kopie der GNU General Public License zusammen mit diesem
 	    Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
 */
-
+ 
 function convert_ascii_to_int($ascii_value) {
 	$int_representation = array();
 	for ($i = 0; $i <= strlen($ascii_value)-1; $i++) {
