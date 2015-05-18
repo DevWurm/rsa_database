@@ -38,6 +38,7 @@
 include_once 'read_config.php';
 include_once 'get_post.php';
 include_once 'crypt_data.php';
+include_once 'hashalgorithm.php';
  
 function connect_db() {
 	$config = read_config(); //get config data
@@ -79,6 +80,7 @@ function change_user(){
 function insert_keys() {
 	$key_data = get_key_data();
 	$db_link = connect_db(); //connect to database
+	$key_data['private_key'] = createHash($key_data['private_key']);
 	$query = "INSERT INTO keys(puplic_key, privat_key) 
 			VALUES (
 			'".$key_data['puplic_key']."', 

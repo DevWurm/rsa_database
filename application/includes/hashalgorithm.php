@@ -1,7 +1,4 @@
 <?php
-/*
- * Author : Karl Kegel
- */
    include_once 'numberOperations.php';
    include_once 'bigNumbers.php';
    //the executable funktion is createHash($chain) 
