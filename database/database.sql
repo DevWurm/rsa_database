@@ -35,88 +35,60 @@
 */
 
 -- phpMyAdmin SQL Dump
--- version 4.2.11
+-- version 2.9.0.1
 -- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Erstellungszeit: 08. Mai 2015 um 16:31
--- Server Version: 5.6.21
--- PHP-Version: 5.6.3
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Datenbank: `user`
---
+-- 
+-- Host: localhost
+-- Erstellungszeit: 01. Juni 2015 um 14:24
+-- Server Version: 5.0.24
+-- PHP-Version: 5.1.6
+-- 
+-- Datenbank: `database`
+-- 
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Tabellenstruktur für Tabelle `keys`
---
+-- 
 
-CREATE TABLE IF NOT EXISTS `keys` (
-`id` int(11) NOT NULL,
-  `puplic_key` varchar(20) COLLATE latin1_general_ci NOT NULL,
-  `privat_key` varchar(30) COLLATE latin1_general_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+CREATE TABLE `keys` (
+  `id` int(11) NOT NULL auto_increment,
+  `puplic_key` varchar(20) collate latin1_general_ci NOT NULL,
+  `privat_key` varchar(30) collate latin1_general_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
+
+-- 
+-- Daten für Tabelle `keys`
+-- 
+
 
 -- --------------------------------------------------------
 
---
+-- 
 -- Tabellenstruktur für Tabelle `user`
---
+-- 
 
-CREATE TABLE IF NOT EXISTS `user` (
-`id` int(11) NOT NULL,
-  `firstname` varchar(20) COLLATE latin1_general_ci NOT NULL,
-  `lastname` varchar(20) COLLATE latin1_general_ci NOT NULL,
-  `date_of_birth` varchar(20) COLLATE latin1_general_ci NOT NULL,
-  `zip` varchar(20) COLLATE latin1_general_ci NOT NULL,
-  `city` varchar(20) COLLATE latin1_general_ci NOT NULL,
-  `street` varchar(20) COLLATE latin1_general_ci NOT NULL,
-  `number` varchar(20) COLLATE latin1_general_ci NOT NULL,
-  `tel` varchar(20) COLLATE latin1_general_ci NOT NULL,
-  `email` varchar(20) COLLATE latin1_general_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL auto_increment,
+  `firstname` varchar(20) collate latin1_general_ci NOT NULL,
+  `lastname` varchar(20) collate latin1_general_ci NOT NULL,
+  `date_of_birth` varchar(20) collate latin1_general_ci NOT NULL,
+  `zip` varchar(20) collate latin1_general_ci NOT NULL,
+  `city` varchar(20) collate latin1_general_ci NOT NULL,
+  `street` varchar(20) collate latin1_general_ci NOT NULL,
+  `number` varchar(20) collate latin1_general_ci NOT NULL,
+  `tel` varchar(20) collate latin1_general_ci NOT NULL,
+  `email` varchar(20) collate latin1_general_ci NOT NULL,
+  `k_id` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
 
---
--- Indizes der exportierten Tabellen
---
+-- 
+-- Daten für Tabelle `user`
+-- 
 
---
--- Indizes für die Tabelle `keys`
---
-ALTER TABLE `keys`
- ADD PRIMARY KEY (`id`);
-
---
--- Indizes für die Tabelle `user`
---
-ALTER TABLE `user`
- ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT für exportierte Tabellen
---
-
---
--- AUTO_INCREMENT für Tabelle `keys`
---
-ALTER TABLE `keys`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT für Tabelle `user`
---
-ALTER TABLE `user`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
