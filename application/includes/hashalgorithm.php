@@ -73,7 +73,7 @@
 		$flag = false;
 		while(!$flag){ //checks of prime value
 			$chain = $chain + 1;
-			$flag = checkPrim($chain);
+			$flag = checkPrime($chain);
 		}
 		$key[$i] = intval($chain % 79); //key becomes the modulo value
 	}

@@ -72,4 +72,5 @@ function decrypt ($db_string, $privkeyd, $pubkeyN) {// rsa decrypt databse strin
 	return convert_int_to_ascii($int_representation); //convert int array into string
 }
 
+
 ?>
