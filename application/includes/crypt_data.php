@@ -45,4 +45,14 @@
 		}
 		return $encrypted_data;
     }
+	
+	 function decrypt_user_data($user_data, $privkeyd, $pubkeyN) {
+    	$decrypted_data = array();
+    	foreach ($user_data as $key => $value) {
+    		if ($key != 'id') {
+				$decrypted_data[$key] = decrypt($value, $privkeyd, $pubkeyN);
+			}
+		}
+		return $decrypted_data;
+    }
 ?> 
