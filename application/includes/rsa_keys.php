@@ -41,6 +41,42 @@ function generate_keys() {
 	$phin = ($p - 1) * ($q - 1);
 	
 	$e = get_random_prime(2, $phin);
+	
+	$d = get_d_by_extended_euklid($phin, $e);
+}
+
+function get_d_by_extended_euklid ($PhiN, $e) { // returns privat key d
+	$i = 0;
+	$a = $PhiN;
+	$b = $e;
+	do {
+		$array[$i][0] = $a; // 0-->a
+		$array[$i][1] = $b; // 1-->b
+		
+		$q = intval($a/$b);
+		$r = $a%$b;
+		
+		$array[$i][2] = $q; // 2-->q
+		
+		$a = $b;
+		$b = $r;
+		
+		$i++;
+	} while ($b!=0);
+	
+	$i--;
+	$s=1;
+	$t=0;
+	
+	while ($i>0) {
+		$array[$i][3] = $s; // 3-->s
+		$array[$i][4] = $t; // 4-->t
+		$i--;
+		$s = $array[$i+1][4];
+		$t = $array[$i+1][3] - $array[$i][2]*$array[$i+1][4];
+	}
+	
+	return $t;
 }
 
 ?>
