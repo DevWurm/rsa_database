@@ -8,7 +8,7 @@ function get_random($length){
 		$min = $min."0";
 	}
 	$max  = "1";
-	for ($i = 0; $i <= $length-2; $i++) {
+	for ($i = 0; $i <= $length-1; $i++) {
 		$max = $max."0";
 	}
 	
