@@ -35,16 +35,23 @@ function get_random_prime2($min_val, $max_val) {
 function generate_keys() {
 	do {
 		$p = get_random_prime(2);
+		echo $p."(p);";
+		do {
 		$q = get_random_prime(2);
-	
+		} while ($p==$q);
+		echo $q."(q);";
+		
 		$n = $p * $q;
 	
 		$phin = ($p - 1) * ($q - 1);
 	
-		$e = get_random_prime2(2, $phin);
+		do {
+			$e = get_random_prime2(2, $phin);
+		} while (!($e>$p && $e>$q));
+		
 	
 		$d = get_d_by_extended_euklid($phin, $e);
-	} while ($d <= 0); //privat key must be positive!
+	} while (!($d>0 && $d<=$phin));
 		
 	$keys[0]=$n;
 	$keys[1]=$e;
@@ -52,6 +59,7 @@ function generate_keys() {
 	
 	return $keys;
 }
+
 function get_d_by_extended_euklid ($PhiN, $e) { // returns privat key d
 	$i = -1;
 	$b = -1;
