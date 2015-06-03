@@ -52,7 +52,7 @@ function mod ($basis, $exponent, $mod) { //returns the result of basis^exponent 
 }
 
 function encode ($array, $key, $keyN) { //rsa encode array with public keys e and N; decode must be include separetly 
-	$encoded = array();
+	$encoded = $array;
 	foreach ($array as $k) {
 		$k = mod($k, $key, $keyN);
 	}
