@@ -44,8 +44,6 @@ function generate_keys() {
 		$e = get_random_prime2(2, $phin);
 	
 		$d = get_d_by_extended_euklid($phin, $e);
-		
-		echo $p.";".$q.";".$n.";".$e.";".$d."<br>";
 	} while ($d <= 0); //privat key must be positive!
 		
 	$keys[0]=$n;
