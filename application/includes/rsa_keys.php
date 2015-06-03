@@ -1,7 +1,5 @@
 
 <?php
-generate_keys();
-
 include_once 'numberOperations.php';
 
 function get_random($length){
@@ -25,7 +23,7 @@ function get_random_prime($length) {
 	return $rand_num;
 }
 
-function get_random_prime($min_val, $max_val) {
+function get_random_prime2($min_val, $max_val) {
 	$rand_num = rand($min_val, $max_val);
 	while (!checkPrime($rand_num)) {
 		$rand_num = rand($min_val, $max_val);
@@ -42,7 +40,7 @@ function generate_keys() {
 	
 	$phin = ($p - 1) * ($q - 1);
 	
-	$e = get_random_prime(2, $phin);
+	$e = get_random_prime2(2, $phin);
 	
 	$d = get_d_by_extended_euklid($phin, $e);
 	
