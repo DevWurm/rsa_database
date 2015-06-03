@@ -45,7 +45,12 @@ function generate_keys() {
 	$e = get_random_prime(2, $phin);
 	
 	$d = get_d_by_extended_euklid($phin, $e);
-	echo "N = $n, e = $e, d = $d";
+	
+	$keys[0]=$n;
+	$keys[1]=$e;
+	$keys[2]=$d;
+	
+	return $keys;
 }
 
 function get_d_by_extended_euklid ($PhiN, $e) { // returns privat key d
