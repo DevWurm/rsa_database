@@ -1,4 +1,6 @@
+
 <?php
+generate_keys();
 
 include_once 'numberOperations.php';
 
@@ -43,37 +45,33 @@ function generate_keys() {
 	$e = get_random_prime(2, $phin);
 	
 	$d = get_d_by_extended_euklid($phin, $e);
+	echo "N = $n, e = $e, d = $d";
 }
 
 function get_d_by_extended_euklid ($PhiN, $e) { // returns privat key d
-	$i = 0;
-	$a = $PhiN;
-	$b = $e;
-	do {
+	$i = -1;
+	$b = -1;
+	while ($b!=0) {
+		$i++;
+		if ($i==0) $a = $PhiN; else $a = $b;
+		if ($i==0) $b = $e; else $b = $r;
+		if ($b!=0) $q = intval($a/$b);
+		if ($b!=0) $r = $a%$b;
+		
 		$array[$i][0] = $a; // 0-->a
 		$array[$i][1] = $b; // 1-->b
-		
-		$q = intval($a/$b);
-		$r = $a%$b;
-		
 		$array[$i][2] = $q; // 2-->q
-		
-		$a = $b;
-		$b = $r;
-		
-		$i++;
-	} while ($b!=0);
-	
-	$i--;
-	$s=1;
-	$t=0;
-	
-	while ($i>0) {
+	}
+
+	$first=0;
+	while ($i>=0) {
+		if ($first==0) {$s=1; $t=0; $first=1;}
+		else {$s=$array[$i+1][4]; $t = $array[$i+1][3] - $array[$i][2]*$array[$i+1][4];}
+			
 		$array[$i][3] = $s; // 3-->s
 		$array[$i][4] = $t; // 4-->t
+		
 		$i--;
-		$s = $array[$i+1][4];
-		$t = $array[$i+1][3] - $array[$i][2]*$array[$i+1][4];
 	}
 	
 	return $t;
