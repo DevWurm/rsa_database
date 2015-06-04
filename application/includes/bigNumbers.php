@@ -133,7 +133,7 @@
 			$c = strval($c).strval($aArray[$i+1]);
 		}
 			$result[$k] = strval(intval(intval($c)/intval(2)));
-			$d = intval(intval($c) - (intval($result[k]) * intval(2)));
+			$d = intval(intval($c) - (intval($result[$k]) * intval(2)));
    /*		
 	* 		echo "c = ".$c."...";
 	*		echo "flag = ".$flag."...";
