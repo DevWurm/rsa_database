@@ -7,9 +7,9 @@ function get_random($length){
 	for ($i = 0; $i <= $length-2; $i++) {
 		$min = $min."0";
 	}
-	$max  = "1";
-	for ($i = 0; $i <= $length-1; $i++) {
-		$max = $max."0";
+	$max  = "9";
+	for ($i = 0; $i <= $length-2; $i++) {
+		$max = $max."9";
 	}
 	
 	return rand($min, $max);
