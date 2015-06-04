@@ -35,6 +35,8 @@
 	    Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
 */
 
+include_once 'key_files.php';
+
 function get_change_data() {
 	$change_data = array();
 	
@@ -193,12 +195,60 @@ function get_id() {
 }
 
 function get_privkey() {
-	if (isset($_POST['privkey'])) {
-		$privkey= $_POST['privkey'];
+	$key = array();		
+	
+	if ($_FILES['key_priv']['error'] == UPLOAD_ERR_OK) {
+		if(move_uploaded_file($_FILES['key_priv']['tmp_name'], '../temp/'.$_FILES['key_priv']['name'])) {
+			$file_handler = fopen('../temp/'.$_FILES['key_priv']['name'], 'r');
+			
+			if(($key = get_key_from_file($file_handle)) && ($key['type'] == "priv")) {
+				fclose($file_handler);
+				unlink('../temp/'.$_FILES['key_priv']['name']);
+				return $key;
+			}
+			else {
+				fclose($file_handler);
+				unlink('../temp/'.$_FILES['key_priv']['name']);
+				die("FEHLER: Fehler beim auslesen der Private Key Datei");
+			}
+			
+		}
+		else {
+			die("FEHLER: Fehler beim abspeichern der Private Key Datei");
+		}
 	}
 	else {
-		die("ERROR: Fehlerhafte Eingabe!");
+		die("FEHLER: Fehler beim hochladen der Private Key Datei");
 	}
-	return $privkey;		
 }
+
+
+function get_pubkey() {
+	$key = array();		
+	
+	if ($_FILES['key_pub']['error'] == UPLOAD_ERR_OK) {
+		if(move_uploaded_file($_FILES['key_pub']['tmp_name'], '../temp/'.$_FILES['key_pub']['name'])) {
+			$file_handler = fopen('../temp/'.$_FILES['key_pub']['name'], 'r');
+			
+			if(($key = get_key_from_file($file_handle)) && ($key['type'] == "pub")) {
+				fclose($file_handler);
+				unlink('../temp/'.$_FILES['key_pub']['name']);
+				return $key;
+			}
+			else {
+				fclose($file_handler);
+				unlink('../temp/'.$_FILES['key_pub']['name']);
+				die("FEHLER: Fehler beim auslesen der Public Key Datei");
+			}
+			
+		}
+		else {
+			die("FEHLER: Fehler beim abspeichern der Public Key Datei");
+		}
+	}
+	else {
+		die("FEHLER: Fehler beim hochladen der Public Key Datei");
+	}
+}
+
 ?>
