@@ -7,15 +7,15 @@ function get_random($length){
 	for ($i = 0; $i <= $length-2; $i++) {
 		$min = $min."0";
 	}
-	$max  = "1";
-	for ($i = 0; $i <= $length-1; $i++) {
-		$max = $max."0";
+	$max  = "9";
+	for ($i = 0; $i <= $length-2; $i++) {
+		$max = $max."9";
 	}
 	
 	return rand($min, $max);
 }
 
-function get_random_prime($length) {
+function get_random_prime_by_length($length) {
 	$rand_num = get_random($length);
 	while (!checkPrime($rand_num)) {
 		$rand_num = get_random($length);
@@ -23,7 +23,7 @@ function get_random_prime($length) {
 	return $rand_num;
 }
 
-function get_random_prime2($min_val, $max_val) {
+function get_random_prime($min_val, $max_val) {
 	$rand_num = rand($min_val, $max_val);
 	while (!checkPrime($rand_num)) {
 		$rand_num = rand($min_val, $max_val);
@@ -34,10 +34,10 @@ function get_random_prime2($min_val, $max_val) {
 
 function generate_keys() {
 	do {
-		$p = get_random_prime(2);
+		$p = get_random_prime_by_length(2);
 		echo $p."(p);";
 		do {
-		$q = get_random_prime(2);
+		$q = get_random_prime_by_length(2);
 		} while ($p==$q);
 		echo $q."(q);";
 		
@@ -46,7 +46,7 @@ function generate_keys() {
 		$phin = ($p - 1) * ($q - 1);
 	
 		do {
-			$e = get_random_prime2(2, $phin);
+			$e = get_random_prime(2, $phin);
 		} while (!($e>$p && $e>$q));
 		
 	
@@ -60,7 +60,7 @@ function generate_keys() {
 	return $keys;
 }
 
-function get_d_by_extended_euklid ($PhiN, $e) { // returns privat key d
+function get_d_by_extended_euklid($PhiN, $e) { // returns privat key d
 	$i = -1;
 	$b = -1;
 	while ($b!=0) {
