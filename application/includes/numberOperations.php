@@ -42,27 +42,25 @@
 		$c = substr($chainS, $i, 1);
 		$n = $n + intval($c);
 		}catch(Exception $e){
-			echo "an error occured [numberOperations.php #012]";
+			echo "an error occured [numberOperations.php #045]";
 		}
 	}
 	// echo "crossfoot = ".$n."<br />";
 	return $n;
  }
    
-   function checkPrim($num){ //$num := positive unsigned int
- 	if($num <= 2){
- 		return true;
- 	}
-	try{
-	for($i = 2; $i*$i <= $num; $i++){ //checks of prime value
+   function checkPrime($num){ //$num := positive unsigned int
+ 	if($num > 1){
+	for($i = 2; $i <= ceil(sqrt($num)); $i++){ //checks of prime value
 		if($num % $i == 0){
 			return false;
 		}
 	}
-	}catch(Exception $e){
-		echo "an error occured [numberOperations.php #030]";
+		return true;
 	}
-	return true;
+	else {
+		return false;
+	}
  }
    
    function toLongVal($string){ //$string := number-string --> maybe long-double value
@@ -76,7 +74,7 @@
 		$long = $long.$c;
  	}
 	}catch(Exception $e){
-		echo "an error occured [numberOperations.php #046]";
+		echo "an error occured [numberOperations.php #079]";
 	}
 	return $long;
  }
