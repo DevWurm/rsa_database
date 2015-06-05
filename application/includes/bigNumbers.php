@@ -35,7 +35,7 @@
 	    Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
 */
 
-    function addBigNumbers($a, $b){ // aEN, bEN
+function addBigNumbers($a, $b){ // aEN, bEN
 	$aArray = array();
 	$bArray = array();
 	$result = array();
@@ -78,7 +78,7 @@
 	}catch(Exception $e){
 		echo "an error occured [bigNumbers.php #079]";
 	}
-		$res;
+	$res;
 	try{
 		for($n = $i; $n >= 0; $n--){ //builds a new string from single number values
 			$res = strval($res).strval($result[$n]);
@@ -93,45 +93,28 @@
 		echo "an error occured [bigNumbers.php #093]";
 	}
 		return strval($res);	
-   }
+}
 
-   function halfOfBigNumbers($a){ //$a := number-string
-   	 $aArray = array();
-	 $result = array();
-	 try{
-		 $lengthOfA = strlen(strval($a));
-		 for($i = 0; $i <= $lengthOfA; $i++){ //puts the string into an array
-			$aArray[$i] = strval(substr(strval($a), $i, 1));
-		  }
-	 }catch(Exception $e){
-	 	echo "an error occured [bigNumbers.php #107]";
-	 }
-	 $i = 0; //relative counter
-	 $k = 0; //absolut counter
-	 $d = 0; //rest
-	 try{
-	 while($i <= $lengthOfA){ //does a division in writing
-		$c = strval($d).strval($aArray[$i]);
-		if(substr(strval($c),0,1) == "0"){
-			$c = strval(substr(strval($c),1));
-		}
-		$flag = false;
-		if(intval($c) < intval(2)){
-			$flag = true;
-			$c = strval($c).strval($aArray[$i+1]);
-		}
-			$result[$k] = strval(intval(intval($c)/intval(2)));
-			$d = intval(intval($c) - (intval($result[$k]) * intval(2)));
-		if($flag){
-			$i = $i + 2;
-		}else{
-		$i++;
-		}
-		$k++;
-	 }
-	 }catch(Exception $e){
-	 	echo "an error occured [bigNumbers.php #133]";
-	 }
-		return strval($result[$k-1]); //returns the long-integer value of the division
-   }
+function halfOfBigNumbers($input){ //$input := number-string
+	$input_array = array();
+	$result_array = array();
+	$remainder = 0;
+	$result = "";
+	
+	for ($i = 0; $i <= strlen($input)-1; $i++) {
+		$input_array[$i] = substr($input, $i, 1);
+	}
+	
+	for ($i = 0; $i <= count($input_array)-1; $i++) {
+		$input_array[$i] = strval($remainder).$input_array[$i];
+		$result_array[$i] = floor(intval($input_array[$i]) / 2);
+		$remainder = $input_array[$i] % 2;
+	}
+	
+	for ($i = 0; $i <= count($result_array)-1 ; $i++) {
+		$result = $result.$result_array[$i];
+	}
+	
+	return $result;
+}
 ?>
