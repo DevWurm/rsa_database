@@ -39,8 +39,11 @@
     function encrypt_user_data($user_data, $pubkeye, $pubkeyN) {
     	$encrypted_data = array();
     	foreach ($user_data as $key => $value) {
-    		if ($key != 'id') {
+    		if ($key != 'id' && $key != 'k_id') {
 				$encrypted_data[$key] = encrypt($value, $pubkeye, $pubkeyN);
+			}
+			else {
+				$encrypted_data[$key] = $value;
 			}
 		}
 		return $encrypted_data;
@@ -49,8 +52,11 @@
 	 function decrypt_user_data($user_data, $privkeyd, $pubkeyN) {
     	$decrypted_data = array();
     	foreach ($user_data as $key => $value) {
-    		if ($key != 'id') {
+    		if ($key != 'id' && $key != 'k_id') {
 				$decrypted_data[$key] = decrypt($value, $privkeyd, $pubkeyN);
+			}
+			else {
+				$encrypted_data[$key] = $value;
 			}
 		}
 		return $decrypted_data;
