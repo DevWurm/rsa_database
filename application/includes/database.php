@@ -56,6 +56,16 @@ function connect_db() {
 	}
  }
 
+function parse_sql_data($data) { //parse sql data (every set as associative array into another array entry)
+    	$parsed_data = array();
+		$i = 0;
+		while($temp = mysqli_fetch_assoc($data)) {
+			$parsed_data[$i] = $temp;
+			$i++;
+		}
+		return $parsed_data;
+    }
+
 
 function change_user(){
 	$change_data = get_change_data();
