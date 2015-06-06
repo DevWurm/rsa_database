@@ -78,12 +78,12 @@ function addBigNumbers($a, $b){ // aEN, bEN
 	}catch(Exception $e){
 		echo "an error occured [bigNumbers.php #079]";
 	}
-	$res;
+	$res = "0";
 	try{
 		for($n = $i; $n >= 0; $n--){ //builds a new string from single number values
 			$res = strval($res).strval($result[$n]);
 		}
-		if(substr(strval($res), 0, 1) == "0"){ //cuts the string to the rigth length
+		while(substr(strval($res), 0, 1) == "0"){ //cuts the string to the rigth length
 			$res = substr(strval($res), 1);
 		}
 		if(strlen(strval($res)) > $lengthOfA+1){ //cuts the string to the rigth length
