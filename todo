@@ -1,0 +1,19 @@
+In das Layout ist die Funktion 
+getSessionState() aus verifyKeys.php einzubinden.
+Sie gibt einen int zurück.
+
+0 --> keine Lese und Schreibrechte in der Datenbank.
+-----> Es müssen sich eingabe/upload möglichkeiten für die Keys öffnen.
+
+1--> Der public Key ist vorhanden. auf ihn kann durch $_SESSION['publicK'] zugegriffen werden.
+         Dadurch hat der Nutzer Schreibrechte in der Datenbank
+----->Es muss sich ein uploadfenster für den private Key öffnen
+
+2--> Der private Key ist vorhanden. auf ihn kann durch $_SESSION['privateK'] zugegriffen werden.
+         Dadurch hat der Nutzer Leserechte in der Datenbank
+----->Es muss sich eine Eingabemöglichkeit für den public Key öffnen.
+
+3--> volle Lese und Schreibrechte. auf beide Keys kann wie oben zugegriffen werden.
+
+nach jeder Eingabe muss das Fenster neu laden und die
+getSessionState Methode erneut ausgeführt werden.
