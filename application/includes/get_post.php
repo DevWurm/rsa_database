@@ -201,10 +201,13 @@ function get_privkey() {
 		if(move_uploaded_file($_FILES['key_priv']['tmp_name'], '../temp/'.$_FILES['key_priv']['name'])) {
 			$file_handler = fopen('../temp/'.$_FILES['key_priv']['name'], 'r');
 			
-			if(($key = get_key_from_file($file_handle)) && ($key['type'] == "priv")) {
+			if(($key = get_key_from_file($file_handler)) && ($key['type'] == "priv")) {
 				fclose($file_handler);
 				unlink('../temp/'.$_FILES['key_priv']['name']);
-				return $key;
+				if (session_status() == PHP_SESSION_DISABLED) {
+					session_start();
+				}
+				$_SESSION['key_priv'] = $key;
 			}
 			else {
 				fclose($file_handler);
@@ -230,10 +233,15 @@ function get_pubkey() {
 		if(move_uploaded_file($_FILES['key_pub']['tmp_name'], '../temp/'.$_FILES['key_pub']['name'])) {
 			$file_handler = fopen('../temp/'.$_FILES['key_pub']['name'], 'r');
 			
-			if(($key = get_key_from_file($file_handle)) && ($key['type'] == "pub")) {
+			$key = get_key_from_file($file_handler);
+			
+			if( ($key!=false) && ($key['type'] == "pub")) {
 				fclose($file_handler);
 				unlink('../temp/'.$_FILES['key_pub']['name']);
-				return $key;
+				if (session_status() == PHP_SESSION_DISABLED) {
+					session_start();
+				}
+				$_SESSION['key_pub'] = $key;
 			}
 			else {
 				fclose($file_handler);
