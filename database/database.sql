@@ -44,7 +44,7 @@
 CREATE TABLE `keys` (
   `id` int(11) NOT NULL auto_increment,
   `puplic_key` varchar(20) collate latin1_general_ci NOT NULL,
-  `privat_key` varchar(30) collate latin1_general_ci NOT NULL,
+  `private_key` varchar(30) collate latin1_general_ci NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
 
