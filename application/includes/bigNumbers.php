@@ -36,63 +36,67 @@
 */
 
 function addBigNumbers($a, $b){ // aEN, bEN
-	$aArray = array();
-	$bArray = array();
-	$result = array();
-	try{
-	   	$lengthOfA = strlen(strval($a));
-		$lengthOfB = strlen(strval($b));
+	$a_array = array();
+	$b_array = array();
+	$result_array = array();
+	$result = "";
+	$max_length = 0;
 	
-		for($i = 0; $i <= $lengthOfA; $i++){ //puts $a into an array
-			$aArray[$i] = strval(substr(strval($a), $i, 1));
-		}
+	$a_length = strlen($a);
+	$b_length = strlen($b);
 	
-		for($i = 0; $i <= $lengthOfB; $i++){ //puts $b into an array
-			$bArray[$i] = strval(substr(strval($b), $i, 1));
+	if ($a_length > $b_length) { //get length of longest number
+		$max_length = $a_length;
+	}
+	else {
+		$max_length = $a_length;
+	}
+	
+	for ($i = 0; $i <= $a_length-1; $i++) { //convert string into array
+		$a_array[$i] = substr($a, $i, 1);
+	}
+	
+	for ($i = 0; $i <= $b_length-1; $i++) { //convert string into array
+		$b_array[$i] = substr($b, $i, 1);
+	}
+	
+	$result_array = array_fill(0, $max_length+1, 0);
+	
+	$i = 1;
+	$temp_val = 0;
+	while ($i <= $max_length) { //add numbers
+	
+		if ($i > $a_length) { // if only values in b_array are remaining, add whole b_array to result_array
+			$result_array[$i-1] += $b_array[$b_length-$i];
 		}
-	}catch(Exception $e){
-		echo "an error occured [bigNumbers.php #054]";
-	}
-	if(!$lengthOfA >= $lengthOfB){
-		$cArray = array(); //switches positions of a and b values
-		$cArray = $aArray;
-		$aArray = $bArray;
-		$bArray = $cArray;
-		$c = $lengthOfA;
-		$lengthOfA = $lengthOfB;
-		$lengthOfB = $c;
-	}
-	try{
-		$i = 0;
+		elseif ($i > $b_length) { // if only values in a_array are remaining, add whole a_array to result_array
+			$result_array[$i-1] += $a_array[$a_length-$i];
+		}
+		else {
+			$temp_val = intval($a_array[$a_length-$i] + $b_array[$b_length-$i]);
 
-		while ($i-1 <= $lengthOfA){ //does an addition in writing
-
-				$result[$i] = strval(intval($result[$i]) + intval($aArray[$lengthOfA-$i]) + intval($bArray[$lengthOfA-$i]));
-
-				if(intval($result[$i]) >= 10){
-					$result[$i+1] = strval(substr(strval($result[$i]), 0, 1));
-					$result[$i] = strval(substr(strval($result[$i]), 1, 1));
-				} 
-			$i++;
+			if (($result_array[$i-1] + $temp_val) >= 10) { // add with borrow
+				$result_array[$i] += 1;
+				$result_array[$i-1] += $temp_val - 10;
+			}
+			else { // add without borrow
+				$result_array[$i-1] += $temp_val;
+			}
 		}
-	}catch(Exception $e){
-		echo "an error occured [bigNumbers.php #079]";
+		$i++;
 	}
-	$res;
-	try{
-		for($n = $i; $n >= 0; $n--){ //builds a new string from single number values
-			$res = strval($res).strval($result[$n]);
-		}
-		if(substr(strval($res), 0, 1) == "0"){ //cuts the string to the rigth length
-			$res = substr(strval($res), 1);
-		}
-		if(strlen(strval($res)) > $lengthOfA+1){ //cuts the string to the rigth length
-			$res = substr(strval($res), 0, strlen(strval($res))-1);
-		}
-	}catch(Exception $e){
-		echo "an error occured [bigNumbers.php #093]";
+	
+	$result_array = array_reverse($result_array);
+	
+	for ($i = 0; $i <= count($result_array)-1; $i++) {
+		$result = $result.$result_array[$i];
 	}
-		return strval($res);	
+	
+	while (substr($result, 0, 1) == "0") {
+		$result = substr($result, 1);
+	}
+	
+	return $result;
 }
 
 function halfOfBigNumbers($input){ //$input := number-string
