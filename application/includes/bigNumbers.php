@@ -45,18 +45,18 @@ function addBigNumbers($a, $b){ // aEN, bEN
 	$a_length = strlen($a);
 	$b_length = strlen($b);
 	
-	if ($a_length > $b_length) { //get length of longest number
+	if ($a_length > $b_length) {
 		$max_length = $a_length;
 	}
 	else {
 		$max_length = $a_length;
 	}
 	
-	for ($i = 0; $i <= $a_length-1; $i++) { //convert string into array
+	for ($i = 0; $i <= $a_length-1; $i++) {
 		$a_array[$i] = substr($a, $i, 1);
 	}
 	
-	for ($i = 0; $i <= $b_length-1; $i++) { //convert string into array
+	for ($i = 0; $i <= $b_length-1; $i++) {
 		$b_array[$i] = substr($b, $i, 1);
 	}
 	
@@ -64,27 +64,28 @@ function addBigNumbers($a, $b){ // aEN, bEN
 	
 	$i = 1;
 	$temp_val = 0;
-	while ($i <= $max_length) { //add numbers
-	
-		if ($i > $a_length) { // if only values in b_array are remaining, add whole b_array to result_array
+	while ($i <= $max_length) {
+		if ($i > $a_length) {
 			$result_array[$i-1] += $b_array[$b_length-$i];
 		}
-		elseif ($i > $b_length) { // if only values in a_array are remaining, add whole a_array to result_array
+		elseif ($i > $b_length) {
 			$result_array[$i-1] += $a_array[$a_length-$i];
 		}
 		else {
 			$temp_val = intval($a_array[$a_length-$i] + $b_array[$b_length-$i]);
 
-			if (($result_array[$i-1] + $temp_val) >= 10) { // add with borrow
+			if (($result_array[$i-1] + $temp_val) >= 10) {
 				$result_array[$i] += 1;
 				$result_array[$i-1] += $temp_val - 10;
 			}
-			else { // add without borrow
+			else {
 				$result_array[$i-1] += $temp_val;
 			}
 		}
 		$i++;
 	}
+	
+	print_r($result_array);
 	
 	$result_array = array_reverse($result_array);
 	
