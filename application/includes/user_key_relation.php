@@ -1,5 +1,6 @@
 <?php
-  include_once 'database.php';  
+  include_once 'database.php'; 
+  include_once 'hashalgorithm.php';
   
   function compareKeys($filekey, $userID){
       
