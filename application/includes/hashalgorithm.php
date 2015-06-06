@@ -37,11 +37,20 @@
 
    include_once 'numberOperations.php';
    include_once 'bigNumbers.php';
+   include_once 'converter.php';
    //the executable funktion is createHash($chain) 
    //all other functions can bee used too, but are in main purposes help functions
    
- function createHash($chain){ //$val must be a positive long-integer number
+ function createHash($chain){ //$val must be a ascii string
+    
+    //convert ascii to number string
+    $chain = convert_ascii_to_int($chain);
+	$chain = implode($chain);
+    
     $chain = fitToLength($chain);
+	
+	echo $chain;
+	
  	try{
  	$chainS = strval($chain);  //string value
  	$length = strlen($chainS); //length of the string
