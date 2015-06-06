@@ -34,19 +34,8 @@
 	    Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
 */
 
--- phpMyAdmin SQL Dump
--- version 2.9.0.1
--- http://www.phpmyadmin.net
--- 
--- Host: localhost
--- Erstellungszeit: 01. Juni 2015 um 14:24
--- Server Version: 5.0.24
--- PHP-Version: 5.1.6
--- 
--- Datenbank: `database`
--- 
+-- SQL Dump
 
--- --------------------------------------------------------
 
 -- 
 -- Tabellenstruktur für Tabelle `keys`
@@ -82,7 +71,8 @@ CREATE TABLE `user` (
   `tel` varchar(20) collate latin1_general_ci NOT NULL,
   `email` varchar(20) collate latin1_general_ci NOT NULL,
   `k_id` int(11) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`k_id`) REFERENCES keys (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=1 ;
 
 -- 
