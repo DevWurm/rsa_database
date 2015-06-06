@@ -85,8 +85,6 @@ function addBigNumbers($a, $b){ // aEN, bEN
 		$i++;
 	}
 	
-	print_r($result_array);
-	
 	$result_array = array_reverse($result_array);
 	
 	for ($i = 0; $i <= count($result_array)-1; $i++) {
