@@ -3,11 +3,6 @@
 <head height=100% width=100%>
 <title>Project-RSA</title>
 <style>
- .offscreen {
-  position: absolute;
-  top: -30em;
-  left: -300em;
-}
 #hmenu_title {
    font-weight: bold;
    font-size: 50px;
@@ -35,7 +30,6 @@
    color: #FFFFFF;
 }
 #td_head {
-   margin: 0;
    padding: .3em .4em .3em .4em;
    text-decoration: none;
    font-weight: bold;
@@ -118,10 +112,24 @@ div#btn_file {
   height: 25px;
   background-color: #303030;
 }
-
 div#btn_file:hover {
   cursor: pointer;
 }*/
+#accordion div{
+  padding-left: 20px;
+  padding-top: 10px;
+  background-color: #303030;
+  height: 55px;
+  position: relative;
+  transition: height 1s ease-in-out;
+}
+#table_ani {
+  width: 100%;
+} 
+#accordion div:hover {
+  height: 550px;
+  transition: height 1s ease-in-out;
+}
 </style>
 <title></title>
 <meta name="author" content="Administrator">
@@ -223,10 +231,11 @@ echo "</table></form>";
 echo "</td></tr></table></th>";
 echo "</tr><tr>";
 echo "<th id='sitebar' height=100%>";
-echo "<table width=300px cellspacing='0'>";
+echo "<div id='accordion'><table width=300px cellspacing='0'>";
 //edit
- echo "<tr style='background-color:#303030'><td><form method='post' action='index.php'><table>";
- echo "<tr><td id='td_head'>Edit</td></tr>";
+
+ echo "<tr style='background-color:#303030'><td><div><form method='post' action='index.php'><table id='table_ani'>";
+ echo "<tr><td id='td_head' align='left'>Edit</td></tr>";
  echo "<tr><td id='td_e'>Firstname* </td><td><input name='firstname' type='text' style='width:95%' value='".$firstname."' disabled/></td></tr>";
  echo "<tr><td id='td_e'>Lastname* </td><td><input name='lastname' type='text' style='width:95%' value='".$lastname."' disabled/></td></tr>";
  echo "<tr><td id='td_e'>Birthday* </td><td><input name='date_of_birth' style='width:95%' type='text' value='".$date_of_birth."' disabled/></td></tr>";
@@ -249,10 +258,11 @@ echo "<table width=300px cellspacing='0'>";
  echo "<tr><td><input type='hidden' name='id' value='".$id."'/></td></tr>";
  echo "<tr><td></td><td><input value='Apply' name='update' id='btn_edit' type='submit'/></td></tr>";
  echo "<tr><td id='td_e' colspan='2'>* Klicken Sie auf den Pfeil (Tabelle) um dieses Feld zu füllen</td></tr>";
- echo "</table></form></td></tr>";
+ echo "</table></form></div></td></tr>";
  //insert
- echo "<tr style='background-color:#303030'><td><form method='post' action='index.php'><table width=100%>";
- echo "<tr><td id='td_head'>Add</td></tr>";
+
+ echo "<tr style='background-color:#303030'><td><div><form method='post' action='index.php'><table id='table_ani'>";
+ echo "<tr><td id='td_head' align='left'>Add</td></tr>";
  echo "<tr><td id='td_e'>Firstname </td><td><input name='firstname' type='text' style='width:95%' value='".$firstname."'/></td></tr>";
  echo "<tr><td id='td_e'>Lastname </td><td><input name='lastname' type='text' style='width:95%' value='".$lastname."'/></td></tr>";
  echo "<tr><td id='td_e'>Birthday </td><td><input name='date_of_birth' style='width:95%' type='text' value='".$date_of_birth."'/></td></tr>";
@@ -264,7 +274,8 @@ echo "<table width=300px cellspacing='0'>";
  echo "<tr><td id='td_e'>Email </td><td><input name='mail' style='width:95%' value='".$mail."' type='text'/></td></tr>";
  //echo "<tr><td><input type='hidden' name='insert_id' value='".$id."'/></td></tr>";
  echo "<tr><td></td><td><input value='Add' name='insert' id='btn_insert' type='submit'/></td></tr>";
- echo "</table></form></td></tr></table></th>";
+ echo "</table></form></div></td></tr>";
+ echo "<tr><td><div style='height: 500px; background-color: #303030;'></div></td></tr></table></div></th>";
  echo "<td width=100% valign='top' align='middle'><table bgcolor='#FFFFFF' width=90%>";
  echo "<tr><th id='th_grid'>Firstname</th><th id='th_grid'>Lastname</th><th id='th_grid'>Birthday</th></th><th id='th_grid'>Location</th>";
  echo "<th id='th_grid'>Telephone</th><th id='th_grid'>Email</th><th id='th_grid'></th>";
