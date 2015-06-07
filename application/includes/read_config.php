@@ -40,13 +40,13 @@
 
     function read_config() { //read config file and return parsed data
 
-		if (file_exists('./config/rsadatabse.conf')) { //search config folder in current directory
-			$file = fopen("./config/order_system.conf", "r"); //open file
-    		$config = parse_config($file, filesize('./config/order_system.conf')); //parse config data
+		if (file_exists('./application/config/rsadatabse.conf')) { //search config folder in current directory
+			$file = fopen("./application/config/order_system.conf", "r"); //open file
+    		$config = parse_config($file, filesize('./application/config/order_system.conf')); //parse config data
 		}
-		else if (file_exists('../config/order_system.conf')) {//search config folder in top directory
-			$file = fopen("../config/order_system.conf", "r"); //open file
-    		$config = parse_config($file, filesize('../config/order_system.conf')); //parse config data
+		else if (file_exists('../application/config/order_system.conf')) {//search config folder in top directory
+			$file = fopen("../application/config/order_system.conf", "r"); //open file
+    		$config = parse_config($file, filesize('../application/config/order_system.conf')); //parse config data
 		}
 		else {
 			die("ERROR 002: Fehler beim öffnen der Konfigurationsdatei");
