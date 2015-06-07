@@ -35,121 +35,89 @@
 	    Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
 */
 
-    function addBigNumbers($a, $b){ // aEN, bEN
-	$aArray = array();
-	$bArray = array();
-	$result = array();
-	try{
-   	$lengthOfA = strlen(strval($a));
-	$lengthOfB = strlen(strval($b));
-	// echo "lengthOfA = ".$lengthOfA."<br />";
-	// echo "lengthOfB = ".$lengthOfB."<br />";
-    // echo "-----------------<br /> aArray : <br/>-----------------<br />";
-	for($i = 0; $i <= $lengthOfA; $i++){ //puts $a into an array
-		$aArray[$i] = strval(substr(strval($a), $i, 1));
-	//	echo $aArray[$i]."<br />";
+function addBigNumbers($a, $b){ // aEN, bEN
+	$a_array = array();
+	$b_array = array();
+	$result_array = array();
+	$result = "";
+	$max_length = 0;
+	
+	$a_length = strlen($a);
+	$b_length = strlen($b);
+	
+	if ($a_length > $b_length) {
+		$max_length = $a_length;
 	}
-	//  echo "-----------------<br /> bArray : <br/>-----------------<br />";
-	for($i = 0; $i <= $lengthOfB; $i++){ //puts $b into an array
-		$bArray[$i] = strval(substr(strval($b), $i, 1));
-	//	echo $bArray[$i]."<br />";
+	else {
+		$max_length = $a_length;
 	}
-	}catch(Exception $e){
-		echo "an error occured [bigNumbers.php #025]";
+	
+	for ($i = 0; $i <= $a_length-1; $i++) {
+		$a_array[$i] = substr($a, $i, 1);
 	}
-	if(!$lengthOfA >= $lengthOfB){
-		$cArray = array(); //switches positions of a and b values
-		$cArray = $aArray;
-		$aArray = $bArray;
-		$bArray = $cArray;
-		$c = $lengthOfA;
-		$lengthOfA = $lengthOfB;
-		$lengthOfB = $c;
+	
+	for ($i = 0; $i <= $b_length-1; $i++) {
+		$b_array[$i] = substr($b, $i, 1);
 	}
-	try{
-		$i = 0;
-	//	echo "-----------------<br /> resultArray : <br/>-----------------";
-		while ($i-1 <= $lengthOfA){ //does an addition in writing
-	//			echo "<br />".$result[$i]." --> ";
-				$result[$i] = strval(intval($result[$i]) + intval($aArray[$lengthOfA-$i]) + intval($bArray[$lengthOfA-$i]));
-	//			echo $result[$i];
-				if(intval($result[$i]) >= 10){
-					$result[$i+1] = strval(substr(strval($result[$i]), 0, 1));
-					$result[$i] = strval(substr(strval($result[$i]), 1, 1));
-	//				echo " --> ".$result[$i];
-				} 
-			$i++;
+	
+	$result_array = array_fill(0, $max_length+1, 0);
+	
+	$i = 1;
+	$temp_val = 0;
+	while ($i <= $max_length) {
+		if ($i > $a_length) {
+			$result_array[$i-1] += $b_array[$b_length-$i];
 		}
-	}catch(Exception $e){
-		echo "an error occured [bigNumbers.php #051]";
-	}
-		$res;
-	//	echo "<br />-----------------<br />result<br />-----------------<br />";
-	try{
-		for($n = $i; $n >= 0; $n--){ //builds a new string from single number values
-	//		echo $result[$n]."<br />";
-			$res = strval($res).strval($result[$n]);
+		elseif ($i > $b_length) {
+			$result_array[$i-1] += $a_array[$a_length-$i];
 		}
-		if(substr(strval($res), 0, 1) == "0"){ //cuts the string to the rigth length
-			$res = substr(strval($res), 1);
-		}
-		if(strlen(strval($res)) > $lengthOfA+1){ //cuts the string to the rigth length
-			$res = substr(strval($res), 0, strlen(strval($res))-1);
-		}
-	}catch(Exception $e){
-		echo "an error occured [bigNumbers.php #067]";
-	}
-		return strval($res);	
-   }
+		else {
+			$temp_val = intval($a_array[$a_length-$i] + $b_array[$b_length-$i]);
 
-   function halfOfBigNumbers($a){ //$a := number-string
-   	 $aArray = array();
-	 $result = array();
-	 try{
-	 $lengthOfA = strlen(strval($a));
-	/* 
-	 * echo "lengthOfA = ".$lengthOfA."<br />";
-     * echo "-----------------<br /> aArray : <br/>-----------------<br />";
-	 */ 
-	 for($i = 0; $i <= $lengthOfA; $i++){ //puts the string into an array
-		$aArray[$i] = strval(substr(strval($a), $i, 1));
-	//	echo $aArray[$i]."<br />";
-	  }
-	 }catch(Exception $e){
-	 	echo "an error occured [bigNumbers.php #086]";
-	 }
-	 $i = 0; //relative counter
-	 $k = 0; //absolut counter
-	 $d = 0; //rest
-	 try{
-	 while($i <= $lengthOfA){ //does a division in writing
-		$c = strval($d).strval($aArray[$i]);
-		if(substr(strval($c),0,1) == "0"){
-			$c = strval(substr(strval($c),1));
+			if (($result_array[$i-1] + $temp_val) >= 10) {
+				$result_array[$i] += 1;
+				$result_array[$i-1] += $temp_val - 10;
+			}
+			else {
+				$result_array[$i-1] += $temp_val;
+			}
 		}
-		$flag = false;
-		if(intval($c) < intval(2)){
-			$flag = true;
-			$c = strval($c).strval($aArray[$i+1]);
-		}
-			$result[$k] = strval(intval(intval($c)/intval(2)));
-			$d = intval(intval($c) - (intval($result[k]) * intval(2)));
-   /*		
-	* 		echo "c = ".$c."...";
-	*		echo "flag = ".$flag."...";
-	*		echo "result = ".$result[$k]."...";
-	*		echo "d = ".$d."<br />";
-	*/
-		if($flag){
-			$i = $i + 2;
-		}else{
 		$i++;
-		}
-		$k++;
-	 }
-	 }catch(Exception $e){
-	 	echo "an error occured [bigNumbers.php #118]";
-	 }
-		return strval($result[$k-1]); //returns the long-integer value of the division
-   }
+	}
+	
+	$result_array = array_reverse($result_array);
+	
+	for ($i = 0; $i <= count($result_array)-1; $i++) {
+		$result = $result.$result_array[$i];
+	}
+	
+	while (substr($result, 0, 1) == "0") {
+		$result = substr($result, 1);
+	}
+	
+	return $result;
+}
+
+function halfOfBigNumbers($input){ //$input := number-string
+	$input_array = array();
+	$result_array = array();
+	$remainder = 0;
+	$result = "";
+	
+	for ($i = 0; $i <= strlen($input)-1; $i++) {
+		$input_array[$i] = substr($input, $i, 1);
+	}
+	
+	for ($i = 0; $i <= count($input_array)-1; $i++) {
+		$input_array[$i] = strval($remainder).$input_array[$i];
+		$result_array[$i] = floor(intval($input_array[$i]) / 2);
+		$remainder = $input_array[$i] % 2;
+	}
+	
+	for ($i = 0; $i <= count($result_array)-1 ; $i++) {
+		$result = $result.$result_array[$i];
+	}
+	
+	return $result;
+}
 ?>
