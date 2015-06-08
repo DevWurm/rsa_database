@@ -37,72 +37,20 @@
 
 include_once 'key_files.php';
 
+
 function get_change_data() {
-	$change_data = array();
-	
-	if (isset($_POST["id"])) {
-		$change_data['id'] = $_POST["id"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["firstname"])) {
-		$change_data['firstname'] = $_POST["firstname"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["lastname"])) {
-		$change_data['lastname'] = $_POST["lastname"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["date_of_birth"])) {
-		$change_data['date_of_birth'] = $_POST["date_of_birth"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["zip"])) {
-		$change_data['zip'] = $_POST["zip"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["city"])) {
-		$change_data['city'] = $_POST["city"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["street"])) {
-		$change_data['street'] = $_POST["street"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["number"])) {
-		$change_data['number'] = $_POST["number"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["tel"])) {
-		$change_data['tel'] = $_POST["tel"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["mail"])) {
-		$change_data['mail'] = $_POST["mail"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	
-	return $change_data;
+$change_data = array();
+$cleaves = array('id','firstname','lastname','date_of_birth','zip','number','city','street','tel','mail');
+for($i = 0; $i <= 9; $i++){
+if (isset($_POST[$cleaves[$i]])) {
+$change_data[$cleaves[$i]] = $_POST[$cleaves[$i]];
 }
+else {
+die("ERROR: Fehlerhafte Eingabe!");
+}
+}
+return $change_data;
+} 
 
 function get_key_data() {
 	$key_data = array();
@@ -124,64 +72,17 @@ function get_key_data() {
 }
 
 function get_insert_data() {
-	$insert_data = array();
-
-	if (isset($_POST["firstname"])) {
-		$insert_data['firstname'] = $_POST["firstname"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["lastname"])) {
-		$insert_data['lastname'] = $_POST["lastname"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["date_of_birth"])) {
-		$insert_data['date_of_birth'] = $_POST["date_of_birth"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["zip"])) {
-		$insert_data['zip'] = $_POST["zip"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["city"])) {
-		$insert_data['city'] = $_POST["city"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["street"])) {
-		$insert_data['street'] = $_POST["street"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["number"])) {
-		$insert_data['number'] = $_POST["number"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["tel"])) {
-		$insert_data['tel'] = $_POST["tel"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	if (isset($_POST["mail"])) {
-		$insert_data['mail'] = $_POST["mail"];
-	}
-	else {
-		die("ERROR: Fehlerhafte Eingabe!");
-	}
-	
-	return $insert_data;
+$insert_data = array();
+$cleaves = array('firstname','lastname','date_of_birth','zip','number','city','street','tel','mail');
+for($i = 0; $i <= 8; $i++){
+if (isset($_POST[$cleaves[$i]])) {
+$insert_data[$cleaves[$i]] = $_POST[$cleaves[$i]];
+}
+else {
+die("ERROR: Fehlerhafte Eingabe!");
+}
+}
+return $insert_data;
 }
 
 function get_id() {
