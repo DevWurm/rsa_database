@@ -143,8 +143,9 @@ function change_user() {
 
 function delete_user() {
 	$id = get_id();
+	$db_link = connect_db();
 	$query = "DELETE  FROM user WHERE id = $id;";
-	$query_status = mysql_query ($query);
+	$query_status = mysqli_query ($db_link, $query);
 	return $query_status;
 }
 
