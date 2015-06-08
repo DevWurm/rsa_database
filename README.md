@@ -17,7 +17,7 @@ access management are not meeting the demand of commercial or security relevant 
 + create a MySQL database from the database/database.sql dump file
 + edit the application/config/database.conf file for your mysql server
 + deploy the content of application/ on a PHP Webserver
-+ (optional) restrict the public webserver access of the application/config/ directory, to keep your server credentials safe
++ (optional) restrict the public webserver access of the application/config/ directory, to keep your server credentials safe<br>
 The latest source is provided on <a href="https://github.com/DevWurm/rsa_database">GitHub</a>
 
 ## License
