@@ -1,9 +1,11 @@
-/*
-	 * License
-	 
-	 * Copyright 2015 DevWurm Enceladus-2, kkegel, mjoest, tarek96, Tolator and vgerber. 
-	
-	 * This file is part of rsa_database.
+-- phpMyAdmin SQL Dump
+-- version 4.2.11
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Erstellungszeit: 07. Jun 2015 um 14:08
+-- Server Version: 5.6.21
+-- PHP-Version: 5.6.3
 
 	 *  rsa_database is free software: you can redistribute it and/or modify
 	    it under the terms of the GNU General Public License as published by
@@ -33,16 +35,6 @@
 	    Sie sollten eine Kopie der GNU General Public License zusammen mit diesem
 	    Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
 */
-
--- phpMyAdmin SQL Dump
--- version 4.2.11
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Erstellungszeit: 08. Mai 2015 um 16:31
--- Server Version: 5.6.21
--- PHP-Version: 5.6.3
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -53,7 +45,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Datenbank: `user`
+-- Datenbank: `database`
 --
 
 -- --------------------------------------------------------
@@ -84,7 +76,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `street` varchar(20) COLLATE latin1_general_ci NOT NULL,
   `number` varchar(20) COLLATE latin1_general_ci NOT NULL,
   `tel` varchar(20) COLLATE latin1_general_ci NOT NULL,
-  `email` varchar(20) COLLATE latin1_general_ci NOT NULL
+  `email` varchar(20) COLLATE latin1_general_ci NOT NULL,
+  `k_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
