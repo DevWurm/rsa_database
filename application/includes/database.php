@@ -122,29 +122,12 @@ function insert_user() {
 	return $query_status; //return failure (FLASE) or success (TRUE)
 }
 
-function change_user() {
-	$change_data = get_change_data();
-	$db_link = connect_db();
-	$change_data = encrypt_user_data($change_data, $pubkeye, $pubkeyN);
-	$query = "UPDATE user SET 
-					firstname = '".$insert_data['firstname']."',
-					lastname = '".$insert_data['lastname']."', 
-					date_of_birth = '".$insert_data['date_of_birth']."',
-					zip = '".$insert_data['zip']."',
-					city = '".$insert_data['city']."', 
-					street = '".$insert_data['street']."', 
-					number = '".$insert_data['number']."', 
-					tel =  '".$insert_data['tel']."', 
-					email = '".$insert_data['mail']."'
-			WHERE id = '".$insert_data['id']."';";
-	$query_status = mysqli_query($db_link, $query); //perform insertion
-	return $query_status; //return failure (FLASE) or success (TRUE)
-}
 
 function delete_user() {
 	$id = get_id();
+	$db_link = connect_db();
 	$query = "DELETE  FROM user WHERE id = $id;";
-	$query_status = mysql_query ($query);
+	$query_status = mysqli_query ($db_link, $query);
 	return $query_status;
 }
 

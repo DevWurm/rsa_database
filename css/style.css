@@ -1,0 +1,163 @@
+/*
+	 * License
+	 
+	 * Copyright 2015 DevWurm Enceladus-2, kkegel, mjoest, tarek96, Tolator and vgerber. 
+	
+	 * This file is part of rsa_database.
+
+	 *  rsa_database is free software: you can redistribute it and/or modify
+	    it under the terms of the GNU General Public License as published by
+	    the Free Software Foundation, either version 3 of the License, or
+	    (at your option) any later version.
+	
+	    rsa_database is distributed in the hope that it will be useful,
+	    but WITHOUT ANY WARRANTY; without even the implied warranty of
+	    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	    GNU General Public License for more details.
+	
+	    You should have received a copy of the GNU General Public License
+	    along with rsa_database.  If not, see <http://www.gnu.org/licenses/>.
+	
+	    Diese Datei ist Teil von rsa_database.
+	
+	    rsa_database ist Freie Software: Sie können es unter den Bedingungen
+	    der GNU General Public License, wie von der Free Software Foundation,
+	    Version 3 der Lizenz oder (nach Ihrer Wahl) jeder späteren
+	    veröffentlichten Version, weiterverbreiten und/oder modifizieren.
+	
+	    rsa_database wird in der Hoffnung, dass es nützlich sein wird, aber
+	    OHNE JEDE GEWÄHRLEISTUNG, bereitgestellt; sogar ohne die implizite
+	    Gewährleistung der MARKTFÄHIGKEIT oder EIGNUNG FÜR EINEN BESTIMMTEN ZWECK.
+	    Siehe die GNU General Public License für weitere Details.
+	
+	    Sie sollten eine Kopie der GNU General Public License zusammen mit diesem
+	    Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
+*/
+
+#hmenu_title {
+   font-weight: bold;
+   font-size: 50px;
+   color: #FFFFFF;
+   background-color: #000000;
+   padding-top: 10px;
+   padding-bottom: 10px;
+}
+#hmenu_fileupload {
+   font-weight: bold;
+   color: #FFFFFF;
+   background-color: #000000;
+   padding-top: 10px;
+   padding-bottom: 10px;
+}
+#menu {
+   background-color: #FFFFFF;
+}
+#sitebar {
+   background-color: #303030;
+   vertical-align: top;
+}
+#th_grid {
+   background-color: #000000;
+   color: #FFFFFF;
+}
+#td_head {
+   padding: .3em .4em .3em .4em;
+   text-decoration: none;
+   font-weight: bold;
+   font-size: 30px;
+   color: #FFFFFF;
+}
+#td_e {
+   color: #929292;
+}
+#btn_insert {
+   cursor: pointer;
+   font: 12px Verdana,sans-serif;
+   font-weight: bold;
+   color: #FFFFFF;
+   border: 1px solid #34495e;
+   background-color: #34495e;
+   width: 80px; padding: 2px;
+   line-height: 130%;
+}
+#btn_upload {
+   cursor: pointer;
+   font: 12px Verdana,sans-serif;
+   font-weight: bold;
+   color: #FFFFFF;
+   border: 1px solid #40C46D;
+   background-color: #40C46D;
+   width: 80px; padding: 2px;
+   line-height: 130%;
+}
+#btn_edit {
+   cursor: pointer;
+   font: 12px Verdana,sans-serif;
+   font-weight: bold;
+   color: #FFFFFF;
+   border: 1px solid #d35400;
+   background-color: #d35400;
+   width: 100px; padding: 2px;
+   line-height: 130%;
+}
+#btn_delete {
+   cursor: pointer;
+   font: 12px Verdana,sans-serif;
+   font-weight: bold;
+   color: #FFFFFF;
+   border: 1px solid #FF0000;
+   background-color: #FF0000;
+   width: 25px; padding: 2px;
+   line-height: 130%;
+}
+#btn_paste {
+   cursor: pointer;
+   font: 12px Verdana,sans-serif;
+   font-weight: bold;
+   color: #FFFFFF;
+   border: 1px solid #e67e22;
+   background-color: #e67e22;
+   width: 25px; padding: 2px;
+   line-height: 130%;
+}
+#errorbox {
+   padding: .3em .4em .3em .4em;
+   text-align: center;
+   background-color: #FF0000;
+   font-size: medium;
+   font-weight: bold;
+   color: white;
+}
+input, div {
+  margin: 0;
+  padding: 0;
+}
+/*input[type="file"] {
+  width: 200px;
+  height: 25px;
+  opacity: 0;
+}
+
+div#btn_file {
+  width: 200px;
+  height: 25px;
+  background-color: #303030;
+}
+div#btn_file:hover {
+  cursor: pointer;
+}*/
+#accordion div{
+  padding-left: 20px;
+  padding-top: 10px;
+  background-color: #303030;
+  height: 55px;
+  position: relative;
+  transition: height 1s ease-in-out;
+}
+#table_ani {
+  width: 100%;
+} 
+#accordion div:hover {
+  height: 550px;
+  transition: height 1s ease-in-out;
+}
