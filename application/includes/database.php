@@ -39,6 +39,7 @@ include_once 'read_config.php';
 include_once 'get_post.php';
 include_once 'crypt_data.php';
 include_once 'hashalgorithm.php';
+include_once 'user_key_relation.php';
  
 function connect_db() {
 	$config = read_config(); //get config data
@@ -64,7 +65,7 @@ function parse_sql_data($data) { //parse sql data (every set as associative arra
 			$i++;
 		}
 		return $parsed_data;
-    }
+}
 
 
 function change_user(){
@@ -134,7 +135,55 @@ function delete_user() {
 function delete_keys() {
 	$privkey = get_privkey();
 	$query = "DELETE  FROM keys WHERE id = $privkey;";
-	$query_status = mysql_query ($query);
+	$query_status = mysqli_query ($query);
 	return $query_status;
+}
+
+function get_user_by_id($id) {
+	$db_link = connect_db();
+	$query = "SELECT * FROM users WHERE id = $id;";
+	$data = mysqli_query($db_link, $query);
+	
+	if ($data == false) {
+		die("FEHLER: Fehler beim Abrufen aus der Datenbank");
+	}
+	elseif (mysqli_num_rows($data) <= 0) {
+		return false;
+	}
+	else {	
+		$data = parse_sql_data($data);
+		
+		if (count($data)>1){
+			$data = decrypt_user_data($data[0], $privkeyd, $pubkeyN);
+		}
+		else {
+			die("FEHLER: Fehlerhafte Datenbankeinträge");
+		}
+		
+		return $data;
+	}
+}
+
+function get_users_by_key() {
+	$db_link = connect_db();
+	$k_id = get_users_by_key($_SESSION['key_priv']);
+	$query = "SELECT * FROM users WHERE k_id = $k_id;";
+	$data = mysqli_query($db_link, $query);
+	
+	if ($data == false) {
+		die("FEHLER: Fehler beim Abrufen aus der Datenbank");
+	}
+	elseif (mysqli_num_rows($data) <= 0) {
+		return false;
+	}
+	else {		
+		$data = parse_sql_data($data);
+		
+		for ($i = 0; $i <= count($data)-1; $i++) {
+			$data[$i] = decrypt_user_data($data[$i], $_SESSION['key_priv']['ind_part'], $_SESSION['key_priv']['N_part']);
+		}
+		
+		return $data;
+	}
 }
 ?>

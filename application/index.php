@@ -48,24 +48,20 @@ if(isset($_POST['insert']))
 // get data for edit view
 if(isset($_POST['paste']))
 {
-         $sql = "SELECT * FROM user WHERE id='".$_POST['paste_id']."' ";
-         $data = mysqli_query($db_link, $sql);
+         $data = get_user_by_id($_POST['paste_id']);
          if($data)
          {
-                 while($row = mysqli_fetch_assoc($data))
-                 {
-                 		// get data from view		
-                         $firstname = $row['firstname'];
-                         $lastname = $row['lastname'];
-                         $date_of_birth = $row['date_of_birth'];
-                         $zip = $row['zip'];
-                         $city = $row['city'];
-                         $street = $row['street'];
-                         $number  = $row['number'];
-                         $tel = $row['tel'];
-                         $mail = $row['email'];
-                         $id = $row["id"];
-                 }
+                 		// get data for view		
+                         $firstname = $data['firstname'];
+                         $lastname = $data['lastname'];
+                         $date_of_birth = $data['date_of_birth'];
+                         $zip = $data['zip'];
+                         $city = $data['city'];
+                         $street = $data['street'];
+                         $number  = $data['number'];
+                         $tel = $data['tel'];
+                         $mail = $data['email'];
+                         $id = $data["id"];
          }
 }
 
@@ -164,12 +160,11 @@ if(isset($_POST["update"]))
  
  if($session_id == 2 or $session_id = 3)
  {
-          $sql = "SELECT * FROM user";
-          $data = mysqli_query($db_link,$sql);
+          $data = get_users_by_key();
           $alt = 0;
           if($data)
           {
-                  while($row = mysqli_fetch_assoc($data))
+                  foreach ($data as $row)
                   {
                           if($alt == 0)
                           {
@@ -201,7 +196,7 @@ if(isset($_POST["update"]))
           }
           else
           {
-                  echo "<tr><td>Fail</td></tr>";
+                  echo "<tr><td>No data</td></tr>";
           }
  }
  else

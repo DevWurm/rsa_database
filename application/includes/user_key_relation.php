@@ -2,7 +2,7 @@
   include_once 'database.php'; 
   include_once 'hashalgorithm.php';
   
-  function get_users_by_key($key) { //$key is a key datastructuree, like in the key session or in the keyfile parser (type, indivisual part, N part)
+  function get_ids_by_key($key) { //$key is a key datastructuree, like in the key session or in the keyfile parser (type, indivisual part, N part)
   	$compare_value = "";
 	$db_link = connect_db();
 	$user_ids = array(); //user ids where the key(pair) matches
