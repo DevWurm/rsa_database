@@ -1,145 +1,8 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head height=100% width=100%>
-<title>Project-RSA</title>
-<style>
-#hmenu_title {
-   font-weight: bold;
-   font-size: 50px;
-   color: #FFFFFF;
-   background-color: #000000;
-   padding-top: 10px;
-   padding-bottom: 10px;
-}
-#hmenu_fileupload {
-   font-weight: bold;
-   color: #FFFFFF;
-   background-color: #000000;
-   padding-top: 10px;
-   padding-bottom: 10px;
-}
-#menu {
-   background-color: #FFFFFF;
-}
-#sitebar {
-   background-color: #303030;
-   vertical-align: top;
-}
-#th_grid {
-   background-color: #000000;
-   color: #FFFFFF;
-}
-#td_head {
-   padding: .3em .4em .3em .4em;
-   text-decoration: none;
-   font-weight: bold;
-   font-size: 30px;
-   color: #FFFFFF;
-}
-#td_e {
-   color: #929292;
-}
-#btn_insert {
-   cursor: pointer;
-   font: 12px Verdana,sans-serif;
-   font-weight: bold;
-   color: #FFFFFF;
-   border: 1px solid #34495e;
-   background-color: #34495e;
-   width: 80px; padding: 2px;
-   line-height: 130%;
-}
-#btn_upload {
-   cursor: pointer;
-   font: 12px Verdana,sans-serif;
-   font-weight: bold;
-   color: #FFFFFF;
-   border: 1px solid #40C46D;
-   background-color: #40C46D;
-   width: 80px; padding: 2px;
-   line-height: 130%;
-}
-#btn_edit {
-   cursor: pointer;
-   font: 12px Verdana,sans-serif;
-   font-weight: bold;
-   color: #FFFFFF;
-   border: 1px solid #d35400;
-   background-color: #d35400;
-   width: 100px; padding: 2px;
-   line-height: 130%;
-}
-#btn_delete {
-   cursor: pointer;
-   font: 12px Verdana,sans-serif;
-   font-weight: bold;
-   color: #FFFFFF;
-   border: 1px solid #FF0000;
-   background-color: #FF0000;
-   width: 25px; padding: 2px;
-   line-height: 130%;
-}
-#btn_paste {
-   cursor: pointer;
-   font: 12px Verdana,sans-serif;
-   font-weight: bold;
-   color: #FFFFFF;
-   border: 1px solid #e67e22;
-   background-color: #e67e22;
-   width: 25px; padding: 2px;
-   line-height: 130%;
-}
-#errorbox {
-   padding: .3em .4em .3em .4em;
-   text-align: center;
-   background-color: #FF0000;
-   font-size: medium;
-   font-weight: bold;
-   color: white;
-}
-input, div {
-  margin: 0;
-  padding: 0;
-}
-/*input[type="file"] {
-  width: 200px;
-  height: 25px;
-  opacity: 0;
-}
-
-div#btn_file {
-  width: 200px;
-  height: 25px;
-  background-color: #303030;
-}
-div#btn_file:hover {
-  cursor: pointer;
-}*/
-#accordion div{
-  padding-left: 20px;
-  padding-top: 10px;
-  background-color: #303030;
-  height: 55px;
-  position: relative;
-  transition: height 1s ease-in-out;
-}
-#table_ani {
-  width: 100%;
-} 
-#accordion div:hover {
-  height: 550px;
-  transition: height 1s ease-in-out;
-}
-</style>
-<title></title>
-<meta name="author" content="Administrator">
-<meta name="editor" content="html-editor phase 5">
-</head>
-<body text="#000000" bgcolor="#FFFFFF" link="#FF0000" alink="#FF0000" vlink="#FF0000" style="margin-left:0px;margin-right:0px;margin-top:0px;margin-bottom:0px;height:100vh">
 <?php
 include_once('includes/database.php');
 include_once('includes/verifyKeys.php');
-$db_link = connect_db();
+
+// view data
 $firstname = "";
 $lastname = "";
 $date_of_birth = "";
@@ -150,22 +13,20 @@ $number = "";
 $tel = "";
 $mail = "";
 $id = 0;
-$session_id = -1;
 
-if(! (mysqli_select_db($db_link, "database")))
-{
-         echo "<div align='center'><a id='errorbox'>Datenbank nicht gefunden!</a></div>";
-         exit("");
-}
+//permission
+$session_id = getSessionState();
 
 
+
+// insert new user
 if(isset($_POST['insert']))
 {
-         $session_id = getSessionState();
          if($session_id == 1 or $session_id == 3)
          {
                   if(insert_user())
                   {
+                  		//get data for view
                           $firstname = $_POST["firstname"];
                           $lastname = $_POST["lastname"];
                           $date_of_birth = $_POST["date_of_birth"];
@@ -183,6 +44,8 @@ if(isset($_POST['insert']))
                   }
          }
 }
+
+// get data for edit view
 if(isset($_POST['paste']))
 {
          $sql = "SELECT * FROM user WHERE id='".$_POST['paste_id']."' ";
@@ -191,6 +54,7 @@ if(isset($_POST['paste']))
          {
                  while($row = mysqli_fetch_assoc($data))
                  {
+                 		// get data from view		
                          $firstname = $row['firstname'];
                          $lastname = $row['lastname'];
                          $date_of_birth = $row['date_of_birth'];
@@ -204,36 +68,54 @@ if(isset($_POST['paste']))
                  }
          }
 }
+
+// delete user
 if(isset($_POST["delete"]))
-{        $session_id = getSessionState();
+{ 
          if($session_id == 1 or $session_id == 3)
          {
                  delete_user();
          }
 }
+
+// update data
 if(isset($_POST["update"]))
 {
-         $session_id = getSessionState();
          if($session_id == 1 or $session_id == 3)
          {
                  change_user();
          }
 }
-//headline
-echo "<table width=100% height=100% id='menu' cellspacing='0'><tr><td id='hmenu_title' colspan='1'>Project-RSA</td>";
-//file upload
-echo "<th id='hmenu_fileupload' align='right' valign='top'><table><tr><td>";
-echo "<form enctype='multipart/form-data' action='index.php' method='POST'><table width=100%>";
-echo "<tr><td><input type='hidden' name='MAX_FILE_SIZE' value='30000' />";
-echo "<div id='btn_file'><input name='file_key_path' type='file'/></div></td>";
-echo "<td><input id='btn_upload' type='submit' value='Upload Keys File' /></td></tr>";
-echo "</table></form>";
-echo "</td></tr></table></th>";
-echo "</tr><tr>";
-echo "<th id='sitebar' height=100%>";
-echo "<div id='accordion'><table width=300px cellspacing='0'>";
-//edit
 
+?>
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head height=100% width=100%>
+<title>rsa_database</title>
+
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#FF0000" alink="#FF0000" vlink="#FF0000" style="margin-left:0px;margin-right:0px;margin-top:0px;margin-bottom:0px;height:100vh">
+
+<!--headline-->
+<table width=100% height=100% id='menu' cellspacing='0'><tr><td id='hmenu_title' colspan='1'>Project-RSA</td>
+
+<!--file upload-->
+<th id='hmenu_fileupload' align='right' valign='top'><table><tr><td>
+<form enctype='multipart/form-data' action='index.php' method='POST'><table width=100%>
+<tr><td><input type='hidden' name='MAX_FILE_SIZE' value='30000' />
+<div id='btn_file'><input name='file_key_path' type='file'/></div></td>
+<td><input id='btn_upload' type='submit' value='Upload Keys File' /></td></tr>
+</table></form>
+</td></tr></table></th>
+</tr><tr>
+<th id='sitebar' height=100%>
+<div id='accordion'><table width=300px cellspacing='0'>
+
+<?php
+ //edit
  echo "<tr style='background-color:#303030'><td><div><form method='post' action='index.php'><table id='table_ani'>";
  echo "<tr><td id='td_head' align='left'>Edit</td></tr>";
  echo "<tr><td id='td_e'>Firstname* </td><td><input name='firstname' type='text' style='width:95%' value='".$firstname."' disabled/></td></tr>";
@@ -245,6 +127,7 @@ echo "<div id='accordion'><table width=300px cellspacing='0'>";
  echo "<tr><td id='td_e'>Number* </td><td><input name='number' style='width:95%' type='text' value='".$number."' disabled/></td></tr>";
  echo "<tr><td id='td_e'>Telephone* </td><td><input name='tel' style='width:95%' value='".$tel."' type='text' disabled/></td></tr>";
  echo "<tr><td id='td_e'>Email* </td><td><input name='mail' style='width:95%' value='".$mail."' type='text' disabled/></td></tr>";
+ 
  //input fields
  echo "<tr><td id='td_e'>Firstname </td><td><input name='firstname' type='text' style='width:95%' value='".$firstname."'/></td></tr>";
  echo "<tr><td id='td_e'>Lastname </td><td><input name='lastname' type='text' style='width:95%' value='".$lastname."'/></td></tr>";
@@ -257,10 +140,10 @@ echo "<div id='accordion'><table width=300px cellspacing='0'>";
  echo "<tr><td id='td_e'>Email </td><td><input name='mail' style='width:95%' value='".$mail."' type='text'/></td></tr>";
  echo "<tr><td><input type='hidden' name='id' value='".$id."'/></td></tr>";
  echo "<tr><td></td><td><input value='Apply' name='update' id='btn_edit' type='submit'/></td></tr>";
- echo "<tr><td id='td_e' colspan='2'>* Klicken Sie auf den Pfeil (Tabelle) um dieses Feld zu füllen</td></tr>";
+ echo "<tr><td id='td_e' colspan='2'>* Klicken Sie auf den Pfeil (Tabelle) um dieses Feld zu fï¿½llen</td></tr>";
  echo "</table></form></div></td></tr>";
+ 
  //insert
-
  echo "<tr style='background-color:#303030'><td><div><form method='post' action='index.php'><table id='table_ani'>";
  echo "<tr><td id='td_head' align='left'>Add</td></tr>";
  echo "<tr><td id='td_e'>Firstname </td><td><input name='firstname' type='text' style='width:95%' value='".$firstname."'/></td></tr>";
@@ -272,15 +155,14 @@ echo "<div id='accordion'><table width=300px cellspacing='0'>";
  echo "<tr><td id='td_e'>Number </td><td><input name='number' style='width:95%' type='text' value='".$number."'/></td></tr>";
  echo "<tr><td id='td_e'>Telephone </td><td><input name='tel' style='width:95%' value='".$tel."' type='text'/></td></tr>";
  echo "<tr><td id='td_e'>Email </td><td><input name='mail' style='width:95%' value='".$mail."' type='text'/></td></tr>";
- //echo "<tr><td><input type='hidden' name='insert_id' value='".$id."'/></td></tr>";
  echo "<tr><td></td><td><input value='Add' name='insert' id='btn_insert' type='submit'/></td></tr>";
  echo "</table></form></div></td></tr>";
  echo "<tr><td><div style='height: 500px; background-color: #303030;'></div></td></tr></table></div></th>";
  echo "<td width=100% valign='top' align='middle'><table bgcolor='#FFFFFF' width=90%>";
  echo "<tr><th id='th_grid'>Firstname</th><th id='th_grid'>Lastname</th><th id='th_grid'>Birthday</th></th><th id='th_grid'>Location</th>";
  echo "<th id='th_grid'>Telephone</th><th id='th_grid'>Email</th><th id='th_grid'></th>";
- $session_id_grid = getSessionState();
- if($session_id_grid == 2 or $session_id_grid = 3)
+ 
+ if($session_id == 2 or $session_id = 3)
  {
           $sql = "SELECT * FROM user";
           $data = mysqli_query($db_link,$sql);
