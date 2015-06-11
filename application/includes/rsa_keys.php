@@ -1,6 +1,8 @@
 
 <?php
 include_once 'numberOperations.php';
+include_once 'key_files.php';
+include_once 'database.php';
 
 function get_random($length){
 	$min  = "1";
@@ -11,7 +13,7 @@ function get_random($length){
 	for ($i = 0; $i <= $length-2; $i++) {
 		$max = $max."9";
 	}
-	
+
 	return rand($min, $max);
 }
 
@@ -35,28 +37,26 @@ function get_random_prime($min_val, $max_val) {
 function generate_keys() {
 	do {
 		$p = get_random_prime_by_length(2);
-		echo $p."(p);";
 		do {
 		$q = get_random_prime_by_length(2);
 		} while ($p==$q);
-		echo $q."(q);";
-		
+
 		$n = $p * $q;
-	
+
 		$phin = ($p - 1) * ($q - 1);
-	
+
 		do {
 			$e = get_random_prime(2, $phin);
 		} while (!($e>$p && $e>$q));
-		
-	
+
+
 		$d = get_d_by_extended_euklid($phin, $e);
 	} while (!($d>0 && $d<=$phin));
-		
-	$keys[0]=$n;
-	$keys[1]=$e;
-	$keys[2]=$d;
-	
+
+	$keys['N_part']=$n;
+	$keys['e_part']=$e;
+	$keys['d_part']=$d;
+
 	return $keys;
 }
 
@@ -69,7 +69,7 @@ function get_d_by_extended_euklid($PhiN, $e) { // returns privat key d
 		if ($i==0) $b = $e; else $b = $r;
 		if ($b!=0) $q = intval($a/$b);
 		if ($b!=0) $r = $a%$b;
-		
+
 		$array[$i][0] = $a; // 0-->a
 		$array[$i][1] = $b; // 1-->b
 		$array[$i][2] = $q; // 2-->q
@@ -79,14 +79,41 @@ function get_d_by_extended_euklid($PhiN, $e) { // returns privat key d
 	while ($i>=0) {
 		if ($first==0) {$s=1; $t=0; $first=1;}
 		else {$s=$array[$i+1][4]; $t = $array[$i+1][3] - $array[$i][2]*$array[$i+1][4];}
-			
+
 		$array[$i][3] = $s; // 3-->s
 		$array[$i][4] = $t; // 4-->t
-		
+
 		$i--;
 	}
-	
+
 	return $t;
 }
 
+
+function generate_key_files() {
+	$key_parts = generate_keys();
+	$key_pub = array();
+	$key_priv = array();
+	$key_files = array();
+
+	$key_pub['ind_part'] = $key_parts['e_part'];
+	$key_pub['N_part'] = $key_parts['N_part'];
+	$key_pub['type'] = 'pub';
+
+	$key_priv['ind_part'] = $key_parts['d_part'];
+	$key_priv['N_part'] = $key_parts['N_part'];
+	$key_priv['type'] = 'priv';
+
+	insert_keys($key_pub, $key_priv);
+
+	$key_files['key_pub'] = generate_file_from_key($key_pub);
+	$key_files['key_priv'] = generate_file_from_key($key_priv);
+
+	if ($key_files['key_pub'] && $key_files['key_priv']) {
+		return $key_files;
+	}
+	else {
+		die("FEHLER: Fehler beim anlegen der Key Files");
+	}
+}
 ?>
