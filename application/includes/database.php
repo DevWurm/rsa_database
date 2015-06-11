@@ -88,14 +88,14 @@ function change_user(){
 	return $query_status; //return failure (FLASE) or success (TRUE)
 }
 
-function insert_keys() {
-	$key_data = get_key_data();
+function insert_keys($key_pub, $key_priv) {
 	$db_link = connect_db(); //connect to database
-	$key_data['private_key'] = createHash($key_data['private_key']);
-	$query = "INSERT INTO keys(puplic_key, privat_key)
+	$key_pub = $key_pub['ind_part'].':'.$key_pub['N_part'];
+	$key_priv = createHash($key_priv['ind_part'].':'.$key_priv['N_part']);
+	$query = "INSERT INTO `keys`(public_key, private_key)
 			VALUES (
-			'".$key_data['puplic_key']."',
-			'".$key_data['privat_key']."'
+			'".$key_pub."',
+			'".$key_priv."'
 			)";
 	$query_status = mysqli_query($db_link, $query); //perform insertion
 	return $query_status; //return failure (FLASE) or success (TRUE)
