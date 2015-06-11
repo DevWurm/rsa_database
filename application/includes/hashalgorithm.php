@@ -1,36 +1,36 @@
 <?php
 /*
 	 * License
-	 
-	 * Copyright 2015 DevWurm Enceladus-2, kkegel, mjoest, tarek96, Tolator and vgerber. 
-	
+
+	 * Copyright 2015 DevWurm Enceladus-2, kkegel, mjoest, tarek96, Tolator and vgerber.
+
 	 * This file is part of rsa_database.
 
 	 *  rsa_database is free software: you can redistribute it and/or modify
 	    it under the terms of the GNU General Public License as published by
 	    the Free Software Foundation, either version 3 of the License, or
 	    (at your option) any later version.
-	
+
 	    rsa_database is distributed in the hope that it will be useful,
 	    but WITHOUT ANY WARRANTY; without even the implied warranty of
 	    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	    GNU General Public License for more details.
-	
+
 	    You should have received a copy of the GNU General Public License
 	    along with rsa_database.  If not, see <http://www.gnu.org/licenses/>.
-	
+
 	    Diese Datei ist Teil von rsa_database.
-	
+
 	    rsa_database ist Freie Software: Sie können es unter den Bedingungen
 	    der GNU General Public License, wie von der Free Software Foundation,
 	    Version 3 der Lizenz oder (nach Ihrer Wahl) jeder späteren
 	    veröffentlichten Version, weiterverbreiten und/oder modifizieren.
-	
+
 	    rsa_database wird in der Hoffnung, dass es nützlich sein wird, aber
 	    OHNE JEDE GEWÄHRLEISTUNG, bereitgestellt; sogar ohne die implizite
 	    Gewährleistung der MARKTFÄHIGKEIT oder EIGNUNG FÜR EINEN BESTIMMTEN ZWECK.
 	    Siehe die GNU General Public License für weitere Details.
-	
+
 	    Sie sollten eine Kopie der GNU General Public License zusammen mit diesem
 	    Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
 */
@@ -38,19 +38,17 @@
    include_once 'numberOperations.php';
    include_once 'bigNumbers.php';
    include_once 'converter.php';
-   //the executable funktion is createHash($chain) 
+   //the executable funktion is createHash($chain)
    //all other functions can bee used too, but are in main purposes help functions
-   
+
  function createHash($chain){ //$val must be a ascii string
-    
+
     //convert ascii to number string
     $chain = convert_ascii_to_int($chain);
 	$chain = implode($chain);
-    
+
     $chain = fitToLength($chain);
-	
-	echo $chain;
-	
+
  	try{
  	$chainS = strval($chain);  //string value
  	$length = strlen($chainS); //length of the string
@@ -72,8 +70,8 @@
 	}
 	// echo "encryption (A+) = ".$encryption."<br />";
 	return finalEncryptor($encryption, $cf); //a final asynchron encryption
- }   
-  
+ }
+
  function buildKey($chain, $cf){ //$chain := number-string ; $cf := crossfoot
  	$key = array();
 	try{
@@ -91,7 +89,7 @@
 	}
 	return $key;
  }
- 
+
  function replace($chainS, $key){ //$chainS := number-string ; $key = key-array of positive unsigned integers
  	$encryption = "";
 	try{
@@ -126,7 +124,7 @@
 	//	echo "#80 : ".$encryptionB."<br />";
 	$encryptionB = toLongVal($encryptionB); //makes the string to a pseudo long value
 	//	echo "#82 : ".$encryptionB."<br />";
-	
+
 	if(strlen($encryptionB) == 16){ //CONTROL
 		return $encryptionB;
 	}
@@ -146,9 +144,9 @@
 		$chain = $chain.substr(strval($chain), $k, 1); //adds an iterative value to the end
 		$k++;
 	}
-	
+
 	while(strlen(strval($chain)) > 8){ //if the length is longer than 8
-		$a = substr($chain,0,1); 
+		$a = substr($chain,0,1);
 		$b = substr($chain,strlen($chain)-1,1);
 	//	echo $a."...".$b."<br />";
 		$a = toLongVal(($a+$b)/2); //cuts dezimal numbers
@@ -159,16 +157,3 @@
 	return $chain;
  }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
