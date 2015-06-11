@@ -158,7 +158,7 @@ if(isset($_POST["update"]))
  echo "<tr><th id='th_grid'>Firstname</th><th id='th_grid'>Lastname</th><th id='th_grid'>Birthday</th></th><th id='th_grid'>Location</th>";
  echo "<th id='th_grid'>Telephone</th><th id='th_grid'>Email</th><th id='th_grid'></th>";
  
- if($session_id == 2 or $session_id = 3)
+ if($session_id == 2 or $session_id == 3)
  {
           $data = get_users_by_key();
           $alt = 0;
