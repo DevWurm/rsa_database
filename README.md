@@ -1,6 +1,6 @@
 # rsa_database
-A demonstrative RSA encrypted web database system. In this project you can see the process of creating RSA key pairs, 
-encrypt user data with the public key, store them into database and read, edit and delete them from the database with the private 
+A demonstrative RSA encrypted web database system. In this project you can see the process of creating RSA key pairs,
+encrypt user data with the public key, store them into database and read, edit and delete them from the database with the private
 key in principle.
 
 ## Disclaimer
@@ -17,6 +17,7 @@ access management are not meeting the demand of commercial or security relevant 
 + create a MySQL database from the database/database.sql dump file
 + edit the application/config/database.conf file for your mysql server
 + deploy the content of application/ on a PHP Webserver
++ give the user of your webserver writing rights to the temp folder
 + (optional) restrict the public webserver access of the application/config/ directory, to keep your server credentials safe<br>
 The latest source is provided on <a href="https://github.com/DevWurm/rsa_database">GitHub</a>
 
