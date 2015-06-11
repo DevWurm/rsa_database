@@ -40,7 +40,6 @@ include_once 'key_files.php';
 
 function get_change_data() {
 	$change_data = array();
-<<<<<<< HEAD
 	$cleaves = array('id','firstname','lastname','date_of_birth','zip','number','city','street','tel','mail');
 	for($i = 0; $i <= 9; $i++){
 		if (isset($_POST[$cleaves[$i]])) {
@@ -75,7 +74,6 @@ function get_key_data() {
 
 function get_insert_data() {
 	$insert_data = array();
-<<<<<<< HEAD
 	$cleaves = array('firstname','lastname','date_of_birth','zip','number','city','street','tel','mail');
 	for($i = 0; $i <= 8; $i++){
 		if (isset($_POST[$cleaves[$i]])) {
