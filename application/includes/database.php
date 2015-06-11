@@ -165,8 +165,11 @@ function get_user_by_id($id) {
 }
 
 function get_users_by_key() {
+	if (session_status() == PHP_SESSION_DISABLED) {
+		session_start();
+	}
 	$db_link = connect_db();
-	$k_id = get_users_by_key($_SESSION['key_priv']);
+	$k_id = get_ids_by_key($_SESSION['key_priv']);
 	$query = "SELECT * FROM users WHERE k_id = $k_id;";
 	$data = mysqli_query($db_link, $query);
 
