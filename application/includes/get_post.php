@@ -52,26 +52,6 @@ function get_change_data() {
 	return $change_data;
 }
 
-
-function get_key_data() {
-	$key_data = array();
-
-	if (isset($_POST['public_key'])) {
-		$key_data['public_key'] = $_POST['public_key'];
-	}
-	else {
-		die("ERROR Fehlerhafte Daten!");
-	}
-	if (isset($_POST['private_key'])) {
-		$key_data['private_key'] = $_POST['private_key'];
-	}
-	else {
-		die("ERROR Fehlerhafte Daten!");
-	}
-
-	return $key_data;
-}
-
 function get_insert_data() {
 	$insert_data = array();
 	$cleaves = array('firstname','lastname','date_of_birth','zip','number','city','street','tel','mail');
@@ -100,20 +80,24 @@ function get_privkey() {
 	$key = array();
 
 	if ($_FILES['key_priv']['error'] == UPLOAD_ERR_OK) {
-		if(move_uploaded_file($_FILES['key_priv']['tmp_name'], '../temp/'.$_FILES['key_priv']['name'])) {
-			$file_handler = fopen('../temp/'.$_FILES['key_priv']['name'], 'r');
+		if(move_uploaded_file($_FILES['key_priv']['tmp_name'], './temp/key_priv_up.drsa')) {
+			$file_handler = fopen('./temp/key_priv_up.drsa', 'r');
 
-			if(($key = get_key_from_file($file_handler)) && ($key['type'] == "priv")) {
+			$key = get_key_from_file($file_handler);
+
+			if($key && ($key['type'] == "priv")) {
 				fclose($file_handler);
-				unlink('../temp/'.$_FILES['key_priv']['name']);
+				unlink('./temp/key_priv_up.drsa');
+
 				if (session_status() == PHP_SESSION_DISABLED) {
 					session_start();
 				}
+
 				$_SESSION['key_priv'] = $key;
 			}
 			else {
 				fclose($file_handler);
-				unlink('../temp/'.$_FILES['key_priv']['name']);
+				unlink('./temp/key_priv_up.drsa');
 				die("FEHLER: Fehler beim auslesen der Private Key Datei");
 			}
 
@@ -132,22 +116,24 @@ function get_pubkey() {
 	$key = array();
 
 	if ($_FILES['key_pub']['error'] == UPLOAD_ERR_OK) {
-		if(move_uploaded_file($_FILES['key_pub']['tmp_name'], '../temp/'.$_FILES['key_pub']['name'])) {
-			$file_handler = fopen('../temp/'.$_FILES['key_pub']['name'], 'r');
+		if(move_uploaded_file($_FILES['key_pub']['tmp_name'], './temp/key_pub_up.drsa')) {
+			$file_handler = fopen('./temp/key_pub_up.drsa', 'r');
 
 			$key = get_key_from_file($file_handler);
 
-			if( ($key!=false) && ($key['type'] == "pub")) {
+			if( $key && ($key['type'] == "pub")) {
 				fclose($file_handler);
-				unlink('../temp/'.$_FILES['key_pub']['name']);
+				unlink('./temp/key_pub_up.drsa');
+
 				if (session_status() == PHP_SESSION_DISABLED) {
 					session_start();
 				}
+
 				$_SESSION['key_pub'] = $key;
 			}
 			else {
 				fclose($file_handler);
-				unlink('../temp/'.$_FILES['key_pub']['name']);
+				unlink('./temp/key_pub_up.drsa');
 				die("FEHLER: Fehler beim auslesen der Public Key Datei");
 			}
 
