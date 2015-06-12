@@ -1,6 +1,7 @@
 <?php
 include_once('includes/database.php');
 include_once('includes/verifyKeys.php');
+include_once('includes/get_post.php');
 
 // view data
 $firstname = "";
@@ -13,6 +14,36 @@ $number = "";
 $tel = "";
 $mail = "";
 $id = 0;
+
+
+
+
+//upload private key
+if (isset($_POST['upload_key_priv'])) {
+  get_private_key();
+}
+
+//delete private key
+if (isset($_POST['delete_key_priv'])) {
+  if (session_status() == PHP_SESSION_DISABLED) {
+    session_start();
+  }
+  unset($_SESSION['key_priv']);
+}
+
+//upload private key
+if (isset($_POST['upload_key_pub'])) {
+  get_public_key();
+}
+
+//delete private key
+if (isset($_POST['delete_key_pub'])) {
+  if (session_status() == PHP_SESSION_DISABLED) {
+    session_start();
+  }
+  unset($_SESSION['key_pub']);
+}
+
 
 //permission
 $session_id = getSessionState();
@@ -100,11 +131,33 @@ if(isset($_POST["update"]))
 
 <!--file upload-->
 <th class='hmenu_fileupload' align='right' valign='top'><table><tr><td>
-<form enctype='multipart/form-data' action='index.php' method='POST'><table width=100%>
-<tr><td class="Private Key "></td><td><div id='btn_file'><input name='key_priv' type='file'/></div></td></tr>
-<tr><td class="Public Key "></td><td><div id='btn_file'><input name='key_pub' type='file'/></div></td></tr>
-<tr><td></td><td align='right'><input class='btn_upload' type='submit' value='Upload Key(s)' /></td></tr>
-</table></form>
+<tr>
+  <form enctype='multipart/form-data' action='index.php' method='POST'>
+    <?php
+      if ($session_id == 0 || $session_id == 1) {
+        echo '<td class="Private Key "></td><td><div id="btn_file"><input name="key_priv" type="file"/></div></td>';
+        echo '<td align="right"><input name="upload_key_priv" class="btn_upload" type="submit" value="Upload Private Key" /></td>';
+      }
+      else {
+        echo '<td align="right"><input name="delete_key_priv" class="btn_upload" type="submit" value="Remove Private Key" /></td>';
+      }
+    ?>
+  </form>
+</tr>
+<tr>
+  <form enctype='multipart/form-data' action='index.php' method='POST'>
+    <?php
+      if ($session_id == 0 || $session_id == 1) {
+        echo '<td class="Public Key "></td><td><div id="btn_file"><input name="key_pub" type="file"/></div></td>';
+        echo '<td align="right"><input name="upload_key_pub" class="btn_upload" type="submit" value="Upload Public Key" /></td>';
+      }
+      else {
+        echo '<td align="right"><input name="delete_key_pub" class="btn_upload" type="submit" value="Remove Public Key" /></td>';
+      }
+    ?>
+  </form>
+</tr>
+</table>
 </td></tr></table></th>
 </tr><tr>
 <th class='sitebar' height=100%>
