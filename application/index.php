@@ -130,12 +130,12 @@ if(isset($_POST["update"]))
 <table width=100% height=100% class='menu' cellspacing='0'><tr><td class='hmenu_title' colspan='1'>Project-RSA</td>
 
 <!--file upload-->
-<th class='hmenu_fileupload' align='right' valign='top'><table><tr><td>
+<th class='hmenu_fileupload' align='right' valign='top'><table>
 <tr>
   <form enctype='multipart/form-data' action='index.php' method='POST'>
     <?php
       if ($session_id == 0 || $session_id == 1) {
-        echo '<td class="Private Key "></td><td><div id="btn_file"><input name="key_priv" type="file"/></div></td>';
+        echo '<td><div id="btn_file"><input name="key_priv" type="file"/></div></td>';
         echo '<td align="right"><input name="upload_key_priv" class="btn_upload" type="submit" value="Upload Private Key" /></td>';
       }
       else {
@@ -148,7 +148,7 @@ if(isset($_POST["update"]))
   <form enctype='multipart/form-data' action='index.php' method='POST'>
     <?php
       if ($session_id == 0 || $session_id == 1) {
-        echo '<td class="Public Key "></td><td><div id="btn_file"><input name="key_pub" type="file"/></div></td>';
+        echo '<td><div id="btn_file"><input name="key_pub" type="file"/></div></td>';
         echo '<td align="right"><input name="upload_key_pub" class="btn_upload" type="submit" value="Upload Public Key" /></td>';
       }
       else {
@@ -157,8 +157,7 @@ if(isset($_POST["update"]))
     ?>
   </form>
 </tr>
-</table>
-</td></tr></table></th>
+</table></th>
 </tr><tr>
 <th class='sitebar' height=100%>
 <div class='accordion'><table width=300px cellspacing='0'>
