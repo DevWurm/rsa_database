@@ -43,16 +43,16 @@ function get_key_from_file($file_handle) {
 
 	while ($file_line = fgets($file_handle)) { //read file line by line
 
-		if ($file_line == "<drsa-private-key-block>" || $file_line == "<drsa-public-key-block>") { //keyblock is opened
+		if ($file_line == "drsa-private-key-block" || $file_line == "drsa-public-key-block") { //keyblock is opened
 
-			if ($file_line == "<drsa-private-key-block>") { //set key type
+			if ($file_line == "drsa-private-key-block") { //set key type
 				$key['type'] = 'priv';
 			}
 			else {
 				$key['type'] = 'pub';
 			}
 
-			while(($file_line = fgets($file_handle)) && ($file_line != "<drsa-key-block-end>")) { //until keyblock is ended or file is empty, add content to key string
+			while(($file_line = fgets($file_handle)) && ($file_line != "drsa-key-block-end")) { //until keyblock is ended or file is empty, add content to key string
 				$full_key = $full_key.$file_line;
 			}
 
@@ -77,9 +77,9 @@ function get_key_from_file($file_handle) {
 function generate_file_from_key($key){ // $key is a key datastructure
 	if ($key['type'] == 'priv') {
 		$file_handle = fopen('./temp/key_priv.drsa', 'w');
-		fwrite($file_handle, "<drsa-private-key-block>\r\n");
+		fwrite($file_handle, "drsa-private-key-block\r\n");
 		fwrite($file_handle, $key['ind_part'].':'.$key['N_part']."\r\n");
-		fwrite($file_handle, "<drsa-key-block-end>");
+		fwrite($file_handle, "drsa-key-block-end");
 		fclose($file_handle);
 
 		if (file_exists('./temp/key_priv.drsa')) {
@@ -91,9 +91,9 @@ function generate_file_from_key($key){ // $key is a key datastructure
 	}
 	else {
 		$file_handle = fopen('./temp/key_pub.drsa', 'w');
-		fwrite($file_handle, "<drsa-public-key-block>\r\n");
+		fwrite($file_handle, "drsa-public-key-block\r\n");
 		fwrite($file_handle, $key['ind_part'].':'.$key['N_part']."\r\n");
-		fwrite($file_handle, "<drsa-key-block-end>");
+		fwrite($file_handle, "drsa-key-block-end");
 		fclose($file_handle);
 
 		if (file_exists('./temp/key_pub.drsa')) {
