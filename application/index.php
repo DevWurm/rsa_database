@@ -16,12 +16,6 @@ $mail = "";
 $id = 0;
 
 safeKeyUpload();
-/*if (isset($_SESSION['key_pub']['ind_part'])) {
-	echo "PublicKey: ".$_SESSION['key_pub']['ind_part']."<br>";
-}
-if (isset($_SESSION['key_priv']['ind_part'])) {
-	echo "PrivatKey: ".$_SESSION['key_priv']['ind_part']."<br>";
-}*/
 
 //upload private key
 if (isset($_POST['upload_key_priv'])) {
@@ -49,6 +43,14 @@ if (isset($_POST['delete_key_pub'])) {
   unset($_SESSION['key_pub']);
 }
 
+if (isset($_SESSION['key_pub']['ind_part'])) {
+	$e = $_SESSION['key_pub']['ind_part'];
+	$N = $_SESSION['key_pub']['N_part'];
+	echo "PublicKey: ".$e."<br>";
+}
+if (isset($_SESSION['key_priv']['ind_part'])) {
+	echo "PrivatKey: ".$_SESSION['key_priv']['ind_part']."<br>";
+}
 
 //permission
 $session_id = getSessionState();
@@ -57,9 +59,9 @@ $session_id = getSessionState();
 if(isset($_POST['insert']))
 {
          if($session_id == 1 or $session_id == 3)
-		 echo "strings";
          {
-                  if(insert_user())
+         	
+         	if(insert_user(intval($e), intval($N)))
                   {
                                   //get data for view
                           $firstname = $_POST["firstname"];
@@ -71,7 +73,7 @@ if(isset($_POST['insert']))
                           $number = $_POST["number"];
                           $tel = $_POST["tel"];
                           $mail = $_POST["mail"];
-                          $id = $_POST["insert_id"];
+                          //$id = $_POST["insert_id"];
                   }
                   else
                   {
@@ -212,6 +214,7 @@ if(isset($_POST["update"]))
  echo "<tr><td class='td_e'>Telephone </td><td><input name='tel' style='width:95%' value='".$tel."' type='text'/></td></tr>";
  echo "<tr><td class='td_e'>Email </td><td><input name='mail' style='width:95%' value='".$mail."' type='text'/></td></tr>";
  echo "<tr><td></td><td><input value='Add' name='insert' class='btn_insert' type='submit'/></td></tr>";
+ safeKey();
  echo "</table></form></div></td></tr>";
  echo "<tr><td><div style='height: 500px; background-color: #303030;'></div></td></tr></table></div></th>";
  echo "<td width=100% valign='top' align='middle'><table bgcolor='#FFFFFF' width=90%>";
