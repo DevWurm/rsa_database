@@ -15,8 +15,7 @@ $tel = "";
 $mail = "";
 $id = 0;
 
-
-
+safeKeyUpload();
 
 //upload private key
 if (isset($_POST['upload_key_priv'])) {
@@ -25,7 +24,7 @@ if (isset($_POST['upload_key_priv'])) {
 
 //delete private key
 if (isset($_POST['delete_key_priv'])) {
-  if (session_status() == PHP_SESSION_NONE) {
+  if (session_status() == PHP_SESSION_DISABLED) {
     session_start();
   }
   unset($_SESSION['key_priv']);
@@ -38,24 +37,33 @@ if (isset($_POST['upload_key_pub'])) {
 
 //delete private key
 if (isset($_POST['delete_key_pub'])) {
-  if (session_status() == PHP_SESSION_NONE) {
+  if (session_status() == PHP_SESSION_DISABLED) {
     session_start();
   }
   unset($_SESSION['key_pub']);
 }
 
+if (isset($_SESSION['key_pub']['ind_part'])) {
+	$e = intval($_SESSION['key_pub']['ind_part']);
+	$N = intval($_SESSION['key_pub']['N_part']);
+	echo "PublicKey: ".$e."<br>";
+}
+if (isset($_SESSION['key_priv']['ind_part'])) {
+	$d = intval($_SESSION['key_priv']['ind_part']);
+	$N = intval($_SESSION['key_priv']['N_part']);
+	echo "PrivatKey: ".$d."<br>";
+}
 
 //permission
 $session_id = getSessionState();
-
-
 
 // insert new user
 if(isset($_POST['insert']))
 {
          if($session_id == 1 or $session_id == 3)
          {
-                  if(insert_user())
+         	
+         	if(insert_user(intval($e), intval($N)))
                   {
                                   //get data for view
                           $firstname = $_POST["firstname"];
@@ -67,7 +75,7 @@ if(isset($_POST['insert']))
                           $number = $_POST["number"];
                           $tel = $_POST["tel"];
                           $mail = $_POST["mail"];
-                          $id = $_POST["insert_id"];
+                          //$id = $_POST["insert_id"];
                   }
                   else
                   {
@@ -78,8 +86,8 @@ if(isset($_POST['insert']))
 
 // get data for edit view
 if(isset($_POST['paste']))
-{
-         $data = get_user_by_id($_POST['paste_id']);
+{		
+         $data = get_user_by_id($_POST['paste_id'], $d, $N);
          if($data)
          {
                                  // get data for view
@@ -110,7 +118,7 @@ if(isset($_POST["update"]))
 {
          if($session_id == 1 or $session_id == 3)
          {
-                 change_user();
+                 change_user($e, $N);
          }
 }
 
@@ -141,6 +149,7 @@ if(isset($_POST["update"]))
       else {
         echo '<td align="right"><input name="delete_key_priv" class="btn_upload" type="submit" value="Remove Private Key" /></td>';
       }
+	 safeKey(); 
     ?>
   </form>
 </tr>
@@ -154,6 +163,8 @@ if(isset($_POST["update"]))
       else {
         echo '<td align="right"><input name="delete_key_pub" class="btn_upload" type="submit" value="Remove Public Key" /></td>';
       }
+	safeKey(); 
+	
     ?>
   </form>
 </tr>
@@ -189,6 +200,7 @@ if(isset($_POST["update"]))
  echo "<tr><td><input type='hidden' name='id' value='".$id."'/></td></tr>";
  echo "<tr><td></td><td><input value='Apply' name='update' class='btn_edit' type='submit'/></td></tr>";
  echo "<tr><td class='td_e' colspan='2'>* Press the orange arrow to fill this field</td></tr>";
+ safeKey(); 
  echo "</table></form></div></td></tr>";
 
  //insert
@@ -204,6 +216,7 @@ if(isset($_POST["update"]))
  echo "<tr><td class='td_e'>Telephone </td><td><input name='tel' style='width:95%' value='".$tel."' type='text'/></td></tr>";
  echo "<tr><td class='td_e'>Email </td><td><input name='mail' style='width:95%' value='".$mail."' type='text'/></td></tr>";
  echo "<tr><td></td><td><input value='Add' name='insert' class='btn_insert' type='submit'/></td></tr>";
+ safeKey();
  echo "</table></form></div></td></tr>";
  echo "<tr><td><div style='height: 500px; background-color: #303030;'></div></td></tr></table></div></th>";
  echo "<td width=100% valign='top' align='middle'><table bgcolor='#FFFFFF' width=90%>";
@@ -212,7 +225,7 @@ if(isset($_POST["update"]))
 
  if($session_id == 2 or $session_id == 3)
  {
-          $data = get_users_by_key();
+          $data = get_users_by_key($d, $N);
           $alt = 0;
           if($data)
           {
@@ -235,13 +248,14 @@ if(isset($_POST["update"]))
                           echo "<td align='middle'> [".$row['zip']."] ".$row['city']." - ".$row['street']."  ".$row['number']."</td>";
                           echo "<td align='middle'>".$row['tel']."</td>";
                           echo "<td align='middle'>".$row['email']."</td>";
-                          echo "<td width='50px'><form action='Main.php' method='post'>";
+                          echo "<td width='50px'><form action='index.php' method='post'>";
 
                           echo "<input name='delete' class='btn_delete' value='X' type='submit'/>";
                           echo "<input type='hidden' name='id' value='".$row['id']."'/>";
 
                           echo "<input name='paste' class='btn_paste' value='>' type='submit'/>";
                           echo "<input type='hidden' name='paste_id' value='".$row['id']."'/>";
+						  safeKey(); 
                           echo "</form></td></tr>";
                           echo "</tr>";
                   }

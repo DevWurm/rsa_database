@@ -68,7 +68,7 @@ function parse_sql_data($data) { //parse sql data (every set as associative arra
 }
 
 
-function change_user(){
+function change_user($pubkeye, $pubkeyN){
 	$change_data = get_change_data();
 	$db_link = connect_db(); //connect to database
 	$change_data = encrypt_user_data($change_data, $pubkeye, $pubkeyN);
@@ -101,13 +101,12 @@ function insert_keys($key_pub, $key_priv) {
 	return $query_status; //return failure (FLASE) or success (TRUE)
 }
 
-function insert_user() {
+function insert_user($pubkeye, $pubkeyN) {
 	$insert_data = get_insert_data();
 	$db_link = connect_db();
 	$insert_data = encrypt_user_data($insert_data, $pubkeye, $pubkeyN);
 	$query = "INSERT INTO
-			user(firstname, lastname, date_of_birth, zip, city, street,
-			number, tel, email)
+			database.user(firstname, lastname, date_of_birth, zip, city, street, number, tel, email, k_id)
 			VALUES (
 			'".$insert_data['firstname']."',
 			'".$insert_data['lastname']."',
@@ -117,7 +116,8 @@ function insert_user() {
 	 		'".$insert_data['street']."',
 	 		'".$insert_data['number']."',
 	 		'".$insert_data['tel']."',
-	 		'".$insert_data['mail']."'
+	 		'".$insert_data['mail']."',
+	 		'".$pubkeyN."'
 			 )";
 	$query_status = mysqli_query($db_link, $query); //perform insertion
 	return $query_status; //return failure (FLASE) or success (TRUE)
@@ -125,6 +125,7 @@ function insert_user() {
 
 
 function delete_user() {
+	
 	$id = get_id();
 	$db_link = connect_db();
 	$query = "DELETE  FROM user WHERE id = $id;";
@@ -139,9 +140,9 @@ function delete_keys() {
 	return $query_status;
 }
 
-function get_user_by_id($id) {
+function get_user_by_id($id, $privkeyd, $pubkeyN) {
 	$db_link = connect_db();
-	$query = "SELECT * FROM users WHERE id = $id;";
+	$query = "SELECT * FROM user WHERE id = $id;";
 	$data = mysqli_query($db_link, $query);
 
 	if ($data == false) {
@@ -153,7 +154,7 @@ function get_user_by_id($id) {
 	else {
 		$data = parse_sql_data($data);
 
-		if (count($data)>1){
+		if (count($data)>=1){
 			$data = decrypt_user_data($data[0], $privkeyd, $pubkeyN);
 		}
 		else {
@@ -164,13 +165,13 @@ function get_user_by_id($id) {
 	}
 }
 
-function get_users_by_key() {
-	if (session_status() == PHP_SESSION_NONE) {
+function get_users_by_key($d, $N) {
+	if (session_status() == PHP_SESSION_DISABLED) {
 		session_start();
 	}
 	$db_link = connect_db();
-	$k_id = get_ids_by_key($_SESSION['key_priv']);
-	$query = "SELECT * FROM users WHERE k_id = $k_id;";
+	$k_id = $N;
+	$query = "SELECT * FROM user WHERE k_id = $k_id;";
 	$data = mysqli_query($db_link, $query);
 
 	if ($data == false) {
@@ -181,9 +182,9 @@ function get_users_by_key() {
 	}
 	else {
 		$data = parse_sql_data($data);
-
+		
 		for ($i = 0; $i <= count($data)-1; $i++) {
-			$data[$i] = decrypt_user_data($data[$i], $_SESSION['key_priv']['ind_part'], $_SESSION['key_priv']['N_part']);
+			$data[$i] = decrypt_user_data($data[$i], $d, $N);
 		}
 
 		return $data;

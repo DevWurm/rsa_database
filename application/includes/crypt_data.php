@@ -56,7 +56,7 @@
 				$decrypted_data[$key] = decrypt($value, $privkeyd, $pubkeyN);
 			}
 			else {
-				$encrypted_data[$key] = $value;
+				$decrypted_data[$key] = $value;
 			}
 		}
 		return $decrypted_data;
