@@ -44,14 +44,12 @@ if (isset($_POST['delete_key_pub'])) {
 }
 
 if (isset($_SESSION['key_pub']['ind_part'])) {
-	$e = intval($_SESSION['key_pub']['ind_part']);
-	$N = intval($_SESSION['key_pub']['N_part']);
+	$e = $_SESSION['key_pub']['ind_part'];
+	$N = $_SESSION['key_pub']['N_part'];
 	echo "PublicKey: ".$e."<br>";
 }
 if (isset($_SESSION['key_priv']['ind_part'])) {
-	$d = intval($_SESSION['key_priv']['ind_part']);
-	$N = intval($_SESSION['key_priv']['N_part']);
-	echo "PrivatKey: ".$d."<br>";
+	echo "PrivatKey: ".$_SESSION['key_priv']['ind_part']."<br>";
 }
 
 //permission
@@ -225,8 +223,7 @@ if(isset($_POST["update"]))
 
  if($session_id == 2 or $session_id == 3)
  {
-          $data = get_users_by_key($d, $N);
-		  echo "success";
+          $data = get_users_by_key();
           $alt = 0;
           if($data)
           {
@@ -249,13 +246,13 @@ if(isset($_POST["update"]))
                           echo "<td align='middle'> [".$row['zip']."] ".$row['city']." - ".$row['street']."  ".$row['number']."</td>";
                           echo "<td align='middle'>".$row['tel']."</td>";
                           echo "<td align='middle'>".$row['email']."</td>";
-                          echo "<td width='50px'><form action='index.php' method='post'>";
+                          echo "<td width='50px'><form action='Main.php' method='post'>";
 
                           echo "<input name='delete' class='btn_delete' value='X' type='submit'/>";
-                          //echo "<input type='hidden' name='id' value='".$row['k_id']."'/>";
+                          echo "<input type='hidden' name='id' value='".$row['id']."'/>";
 
                           echo "<input name='paste' class='btn_paste' value='>' type='submit'/>";
-                          //echo "<input type='hidden' name='paste_id' value='".$row['id']."'/>";
+                          echo "<input type='hidden' name='paste_id' value='".$row['id']."'/>";
 						  safeKey(); 
                           echo "</form></td></tr>";
                           echo "</tr>";

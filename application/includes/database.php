@@ -117,8 +117,8 @@ function insert_user($pubkeye, $pubkeyN) {
 	 		'".$insert_data['number']."',
 	 		'".$insert_data['tel']."',
 	 		'".$insert_data['mail']."',
-	 		'".$pubkeyN."'
-			 )";
+	 		'1'
+			 )"; // K_id? Was ist das?????????????????????????????????????????????????
 	$query_status = mysqli_query($db_link, $query); //perform insertion
 	return $query_status; //return failure (FLASE) or success (TRUE)
 }
@@ -164,13 +164,13 @@ function get_user_by_id($id) {
 	}
 }
 
-function get_users_by_key($d, $N) {
+function get_users_by_key() {
 	if (session_status() == PHP_SESSION_DISABLED) {
 		session_start();
 	}
 	$db_link = connect_db();
-	$k_id = $N;
-	$query = "SELECT * FROM user WHERE k_id = $k_id;";
+	$k_id = get_ids_by_key($_SESSION['key_priv']);
+	$query = "SELECT * FROM users WHERE k_id = $k_id;";
 	$data = mysqli_query($db_link, $query);
 
 	if ($data == false) {
@@ -181,9 +181,9 @@ function get_users_by_key($d, $N) {
 	}
 	else {
 		$data = parse_sql_data($data);
-		
+
 		for ($i = 0; $i <= count($data)-1; $i++) {
-			$data[$i] = decrypt_user_data($data[$i], $d, $N);
+			$data[$i] = decrypt_user_data($data[$i], $_SESSION['key_priv']['ind_part'], $_SESSION['key_priv']['N_part']);
 		}
 
 		return $data;
