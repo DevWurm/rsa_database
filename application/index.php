@@ -147,7 +147,7 @@ if(isset($_POST["update"]))
 <tr>
   <form enctype='multipart/form-data' action='index.php' method='POST'>
     <?php
-      if ($session_id == 0 || $session_id == 1) {
+      if ($session_id == 0 || $session_id == 2) {
         echo '<td><div id="btn_file"><input name="key_pub" type="file"/></div></td>';
         echo '<td align="right"><input name="upload_key_pub" class="btn_upload" type="submit" value="Upload Public Key" /></td>';
       }

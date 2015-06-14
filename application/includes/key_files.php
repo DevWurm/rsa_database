@@ -43,9 +43,9 @@ function get_key_from_file($file_handle) {
 
 	while ($file_line = fgets($file_handle)) { //read file line by line
 
-		if ($file_line == "<drsa-private-key-block>" || $file_line == "<drsa-public-key-block>") { //keyblock is opened
+		if ($file_line == "<drsa-private-key-block>\r\n" || $file_line == "<drsa-public-key-block>\r\n") { //keyblock is opened
 
-			if ($file_line == "<drsa-private-key-block>") { //set key type
+			if ($file_line == "<drsa-private-key-block>\r\n") { //set key type
 				$key['type'] = 'priv';
 			}
 			else {
