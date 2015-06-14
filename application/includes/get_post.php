@@ -36,6 +36,7 @@
 */
 
 include_once 'key_files.php';
+include_once 'user_key_relation.php';
 
 
 function get_change_data() {
@@ -54,13 +55,21 @@ function get_change_data() {
 
 function get_insert_data() {
 	$insert_data = array();
-	$cleaves = array('firstname','lastname','date_of_birth','zip','number','city','street','tel','mail');
-	for($i = 0; $i <= 8; $i++){
-		if (isset($_POST[$cleaves[$i]])) {
-			$insert_data[$cleaves[$i]] = $_POST[$cleaves[$i]];
+	$cleaves = array('firstname','lastname','date_of_birth','zip','number','city','street','tel','mail', 'k_id');
+	for($i = 0; $i <= 9; $i++){
+		if ($cleaves[$i] == 'k_id') {
+			if (session_status() == PHP_SESSION_NONE) {
+				session_start();
+			}
+			$insert_data['k_id'] = get_key_id_by_key($_SESSION['key_pub']);
 		}
 		else {
-			die("ERROR: Fehlerhafte Eingabe!");
+			if (isset($_POST[$cleaves[$i]])) {
+				$insert_data[$cleaves[$i]] = $_POST[$cleaves[$i]];
+			}
+			else {
+				die("ERROR: Fehlerhafte Eingabe!");
+			}
 		}
 	}
 	return $insert_data;

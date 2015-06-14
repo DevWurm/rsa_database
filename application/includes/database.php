@@ -71,7 +71,7 @@ function parse_sql_data($data) { //parse sql data (every set as associative arra
 function change_user(){
 	$change_data = get_change_data();
 	$db_link = connect_db(); //connect to database
-	$change_data = encrypt_user_data($change_data, $pubkeye, $pubkeyN);
+	$change_data = encrypt_user_data($change_data, $_SESSION['key_pub']['ind_part'], $_SESSION['key_pub']['N_part']);
 	$query = "UPDATE user SET
 			firstname='".$change_data['firstname']."',
 			lastname='".$change_data['lastname']."',
@@ -92,7 +92,7 @@ function insert_keys($key_pub, $key_priv) {
 	$db_link = connect_db(); //connect to database
 	$key_pub = $key_pub['ind_part'].':'.$key_pub['N_part'];
 	$key_priv = createHash($key_priv['ind_part'].':'.$key_priv['N_part']);
-	$query = "INSERT INTO `keys`(public_key, private_key)
+	$query = "INSERT INTO `key_pairs`(public_key, private_key)
 			VALUES (
 			'".$key_pub."',
 			'".$key_priv."'
@@ -104,10 +104,14 @@ function insert_keys($key_pub, $key_priv) {
 function insert_user() {
 	$insert_data = get_insert_data();
 	$db_link = connect_db();
-	$insert_data = encrypt_user_data($insert_data, $pubkeye, $pubkeyN);
+
+	if (session_status() == PHP_SESSION_NONE) {
+		session_start();
+	}
+	$insert_data = encrypt_user_data($insert_data, $_SESSION['key_pub']['ind_part'], $_SESSION['key_pub']['N_part']);
 	$query = "INSERT INTO
 			user(firstname, lastname, date_of_birth, zip, city, street,
-			number, tel, email)
+			number, tel, email, k_id)
 			VALUES (
 			'".$insert_data['firstname']."',
 			'".$insert_data['lastname']."',
@@ -117,7 +121,8 @@ function insert_user() {
 	 		'".$insert_data['street']."',
 	 		'".$insert_data['number']."',
 	 		'".$insert_data['tel']."',
-	 		'".$insert_data['mail']."'
+	 		'".$insert_data['mail']."',
+			'".$insert_data['k_id']."'
 			 )";
 	$query_status = mysqli_query($db_link, $query); //perform insertion
 	return $query_status; //return failure (FLASE) or success (TRUE)
@@ -134,7 +139,7 @@ function delete_user() {
 
 function delete_keys() {
 	$privkey = get_privkey();
-	$query = "DELETE  FROM keys WHERE id = $privkey;";
+	$query = "DELETE  FROM key_pairs WHERE id = $privkey;";
 	$query_status = mysqli_query ($query);
 	return $query_status;
 }
@@ -153,8 +158,11 @@ function get_user_by_id($id) {
 	else {
 		$data = parse_sql_data($data);
 
-		if (count($data)>1){
-			$data = decrypt_user_data($data[0], $privkeyd, $pubkeyN);
+		if (count($data)==1){
+			if (session_status() == PHP_SESSION_NONE) {
+				session_start();
+			}
+			$data = decrypt_user_data($data[0], $_SESSION['key_priv']['ind_part'], $_SESSION['key_priv']['N_part']);
 		}
 		else {
 			die("FEHLER: Fehlerhafte Datenbankeinträge");
@@ -169,7 +177,7 @@ function get_users_by_key() {
 		session_start();
 	}
 	$db_link = connect_db();
-	$k_id = get_ids_by_key($_SESSION['key_priv']);
+	$k_id = get_key_id_by_key($_SESSION['key_priv']);
 	$query = "SELECT * FROM users WHERE k_id = $k_id;";
 	$data = mysqli_query($db_link, $query);
 

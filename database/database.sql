@@ -39,11 +39,11 @@
 
 --
 
--- Tabellenstruktur für Tabelle `keys`
+-- Tabellenstruktur für Tabelle `key_pairs`
 
 --
 
-CREATE TABLE IF NOT EXISTS `keys` (
+CREATE TABLE IF NOT EXISTS `key_pairs` (
   `id` int(11) NOT NULL auto_increment,
   `public_key` varchar(20) collate latin1_general_ci NOT NULL,
   `private_key` varchar(30) collate latin1_general_ci NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `keys` (
 );
 
 --
--- Daten für Tabelle `keys`
+-- Daten für Tabelle `key_pairs`
 --
 
 
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(20) collate latin1_general_ci NOT NULL,
   `k_id` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
-	FOREIGN KEY (`k_id`) REFERENCES `keys` (`id`)
+	FOREIGN KEY (`k_id`) REFERENCES `key_pairs` (`id`)
 );
 
 
