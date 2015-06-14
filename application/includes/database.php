@@ -101,12 +101,13 @@ function insert_keys($key_pub, $key_priv) {
 	return $query_status; //return failure (FLASE) or success (TRUE)
 }
 
-function insert_user($pubkeye, $pubkeyN) {
+function insert_user() {
 	$insert_data = get_insert_data();
 	$db_link = connect_db();
 	$insert_data = encrypt_user_data($insert_data, $pubkeye, $pubkeyN);
 	$query = "INSERT INTO
-			database.user(firstname, lastname, date_of_birth, zip, city, street, number, tel, email, k_id)
+			user(firstname, lastname, date_of_birth, zip, city, street,
+			number, tel, email)
 			VALUES (
 			'".$insert_data['firstname']."',
 			'".$insert_data['lastname']."',
@@ -116,9 +117,8 @@ function insert_user($pubkeye, $pubkeyN) {
 	 		'".$insert_data['street']."',
 	 		'".$insert_data['number']."',
 	 		'".$insert_data['tel']."',
-	 		'".$insert_data['mail']."',
-	 		'1'
-			 )"; // K_id? Was ist das?????????????????????????????????????????????????
+	 		'".$insert_data['mail']."'
+			 )";
 	$query_status = mysqli_query($db_link, $query); //perform insertion
 	return $query_status; //return failure (FLASE) or success (TRUE)
 }
