@@ -59,8 +59,8 @@ function get_key_from_file($file_handle) {
 			$key_parts = explode(':', $full_key, 2);
 
 			if ($key_parts != false) { //spit key string and add to key data structure
-				$key['ind_part'] = $key_parts[0];
-				$key['N_part'] = $key_parts[1];
+				$key['ind_part'] = intval($key_parts[0]);
+				$key['N_part'] = intval($key_parts[1]);
 			}
 			else {
 				die("FEHLER: Fehlerhaftes Schlüsselformat");
