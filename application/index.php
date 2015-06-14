@@ -20,7 +20,7 @@ $id = 0;
 
 //upload private key
 if (isset($_POST['upload_key_priv'])) {
-  get_private_key();
+  get_privkey();
 }
 
 //delete private key
@@ -33,7 +33,7 @@ if (isset($_POST['delete_key_priv'])) {
 
 //upload private key
 if (isset($_POST['upload_key_pub'])) {
-  get_public_key();
+  get_pubkey();
 }
 
 //delete private key
