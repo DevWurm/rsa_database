@@ -89,7 +89,7 @@ function get_privkey() {
 				fclose($file_handler);
 				unlink('./temp/key_priv_up.drsa');
 
-				if (session_status() == PHP_SESSION_DISABLED) {
+				if (session_status() == PHP_SESSION_NONE) {
 					session_start();
 				}
 
@@ -125,7 +125,7 @@ function get_pubkey() {
 				fclose($file_handler);
 				unlink('./temp/key_pub_up.drsa');
 
-				if (session_status() == PHP_SESSION_DISABLED) {
+				if (session_status() == PHP_SESSION_NONE) {
 					session_start();
 				}
 

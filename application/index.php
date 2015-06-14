@@ -25,7 +25,7 @@ if (isset($_POST['upload_key_priv'])) {
 
 //delete private key
 if (isset($_POST['delete_key_priv'])) {
-  if (session_status() == PHP_SESSION_DISABLED) {
+  if (session_status() == PHP_SESSION_NONE) {
     session_start();
   }
   unset($_SESSION['key_priv']);
@@ -38,7 +38,7 @@ if (isset($_POST['upload_key_pub'])) {
 
 //delete private key
 if (isset($_POST['delete_key_pub'])) {
-  if (session_status() == PHP_SESSION_DISABLED) {
+  if (session_status() == PHP_SESSION_NONE) {
     session_start();
   }
   unset($_SESSION['key_pub']);

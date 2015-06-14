@@ -165,7 +165,7 @@ function get_user_by_id($id) {
 }
 
 function get_users_by_key() {
-	if (session_status() == PHP_SESSION_DISABLED) {
+	if (session_status() == PHP_SESSION_NONE) {
 		session_start();
 	}
 	$db_link = connect_db();
