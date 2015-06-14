@@ -15,13 +15,8 @@ $tel = "";
 $mail = "";
 $id = 0;
 
-safeKeyUpload();
-/*if (isset($_SESSION['key_pub']['ind_part'])) {
-	echo "PublicKey: ".$_SESSION['key_pub']['ind_part']."<br>";
-}
-if (isset($_SESSION['key_priv']['ind_part'])) {
-	echo "PrivatKey: ".$_SESSION['key_priv']['ind_part']."<br>";
-}*/
+
+
 
 //upload private key
 if (isset($_POST['upload_key_priv'])) {
@@ -53,11 +48,12 @@ if (isset($_POST['delete_key_pub'])) {
 //permission
 $session_id = getSessionState();
 
+
+
 // insert new user
 if(isset($_POST['insert']))
 {
          if($session_id == 1 or $session_id == 3)
-		 echo "strings";
          {
                   if(insert_user())
                   {
@@ -145,7 +141,6 @@ if(isset($_POST["update"]))
       else {
         echo '<td align="right"><input name="delete_key_priv" class="btn_upload" type="submit" value="Remove Private Key" /></td>';
       }
-	 safeKey(); 
     ?>
   </form>
 </tr>
@@ -159,8 +154,6 @@ if(isset($_POST["update"]))
       else {
         echo '<td align="right"><input name="delete_key_pub" class="btn_upload" type="submit" value="Remove Public Key" /></td>';
       }
-	safeKey(); 
-	
     ?>
   </form>
 </tr>
@@ -196,7 +189,6 @@ if(isset($_POST["update"]))
  echo "<tr><td><input type='hidden' name='id' value='".$id."'/></td></tr>";
  echo "<tr><td></td><td><input value='Apply' name='update' class='btn_edit' type='submit'/></td></tr>";
  echo "<tr><td class='td_e' colspan='2'>* Press the orange arrow to fill this field</td></tr>";
- safeKey(); 
  echo "</table></form></div></td></tr>";
 
  //insert
@@ -250,7 +242,6 @@ if(isset($_POST["update"]))
 
                           echo "<input name='paste' class='btn_paste' value='>' type='submit'/>";
                           echo "<input type='hidden' name='paste_id' value='".$row['id']."'/>";
-						  safeKey(); 
                           echo "</form></td></tr>";
                           echo "</tr>";
                   }
