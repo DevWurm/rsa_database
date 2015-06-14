@@ -67,7 +67,6 @@ if(isset($_POST['insert']))
                           $number = $_POST["number"];
                           $tel = $_POST["tel"];
                           $mail = $_POST["mail"];
-                          $id = $_POST["insert_id"];
                   }
                   else
                   {
