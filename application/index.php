@@ -156,6 +156,11 @@ if(isset($_POST["update"]))
     ?>
   </form>
 </tr>
+<tr>
+<?php
+ echo "<td colspan='2' align='right'><a class='akey' href='generatekey.php'>No key?</a></td>";
+?>
+</tr>
 </table></th>
 </tr><tr>
 <th class='sitebar' height=100%>
