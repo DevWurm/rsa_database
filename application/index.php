@@ -243,7 +243,7 @@ if(isset($_POST["update"]))
                           echo "<td align='middle'>".$row['firstname']."</td>";
                           echo "<td align='middle'>".$row['lastname']."</td>";
                           echo "<td align='middle'>".$row['date_of_birth']."</td>";
-                          echo "<td align='middle'> [".$row['zip']."] ".$row['city']." - ".$row['street']."  ".$row['number']."</td>";
+                          echo "<td align='middle'> ".$row['zip']." ".$row['city'].", ".$row['street']."  ".$row['number']."</td>";
                           echo "<td align='middle'>".$row['tel']."</td>";
                           echo "<td align='middle'>".$row['email']."</td>";
                           echo "<td width='50px'><form action='index.php' method='post'>";
