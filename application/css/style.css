@@ -161,3 +161,21 @@ div#btn_file:hover {
   height: 550px;
   transition: height 1s ease-in-out;
 }
+.akey:link {
+  color: #FFFFFF;	
+}
+.akey:visited {
+  color: #FFFFFF;
+}
+.akey:hover {
+  color: #DDDDDD;
+}
+.adownload:link {
+  color: #DDDDDD;	
+}
+.adownload:visited {
+  color: #DDDDDD;
+}
+.adownload:hover {
+  color: #FFFFFF;
+}

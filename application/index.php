@@ -161,10 +161,15 @@ if(isset($_POST["update"]))
       else {
         echo '<td align="right"><input name="delete_key_pub" class="btn_upload" type="submit" value="Remove Public Key" /></td>';
       }
-	safeKey(); 
-	
+	 safeKey(); 
+
     ?>
   </form>
+</tr>
+<tr>
+<?php
+ echo "<td colspan='2' align='right'><a class='akey' href='generatekey.php'>No key?</a></td>";
+?>
 </tr>
 </table></th>
 </tr><tr>
