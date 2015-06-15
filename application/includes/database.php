@@ -178,7 +178,7 @@ function get_users_by_key() {
 	}
 	$db_link = connect_db();
 	$k_id = get_key_id_by_key($_SESSION['key_priv']);
-	$query = "SELECT * FROM users WHERE k_id = $k_id;";
+	$query = "SELECT * FROM user WHERE k_id = $k_id;";
 	$data = mysqli_query($db_link, $query);
 
 	if ($data == false) {
