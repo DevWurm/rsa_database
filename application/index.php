@@ -234,7 +234,7 @@ if(isset($_POST["update"]))
                           echo "<td align='middle'> [".$row['zip']."] ".$row['city']." - ".$row['street']."  ".$row['number']."</td>";
                           echo "<td align='middle'>".$row['tel']."</td>";
                           echo "<td align='middle'>".$row['email']."</td>";
-                          echo "<td width='50px'><form action='Main.php' method='post'>";
+                          echo "<td width='50px'><form action='index.php' method='post'>";
 
                           echo "<input name='delete' class='btn_delete' value='X' type='submit'/>";
                           echo "<input type='hidden' name='id' value='".$row['id']."'/>";

@@ -146,7 +146,7 @@ function delete_keys() {
 
 function get_user_by_id($id) {
 	$db_link = connect_db();
-	$query = "SELECT * FROM users WHERE id = $id;";
+	$query = "SELECT * FROM user WHERE id = $id;";
 	$data = mysqli_query($db_link, $query);
 
 	if ($data == false) {
