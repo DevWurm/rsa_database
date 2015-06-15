@@ -64,15 +64,15 @@ if(isset($_POST['insert']))
          	if(insert_user(intval($e), intval($N)))
                   {
                                   //get data for view
-                          $firstname = $_POST["firstname"];
-                          $lastname = $_POST["lastname"];
-                          $date_of_birth = $_POST["date_of_birth"];
-                          $zip = $_POST["zip"];
-                          $city = $_POST["city"];
-                          $street = $_POST["street"];
-                          $number = $_POST["number"];
-                          $tel = $_POST["tel"];
-                          $mail = $_POST["mail"];
+                          //$firstname = $_POST["firstname"];
+                          //$lastname = $_POST["lastname"];
+                          //$date_of_birth = $_POST["date_of_birth"];
+                          //$zip = $_POST["zip"];
+                          //$city = $_POST["city"];
+                          //$street = $_POST["street"];
+                          //$number = $_POST["number"];
+                          //$tel = $_POST["tel"];
+                          //$mail = $_POST["mail"];
                           //$id = $_POST["insert_id"];
                   }
                   else
