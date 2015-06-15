@@ -172,38 +172,52 @@ if(isset($_POST["update"]))
 <div class='accordion'><table width=300px cellspacing='0'>
 
 <?php
+ 
  //edit
  echo "<tr style='background-color:#303030'><td><div><form method='post' action='index.php'><table class='table_ani'>";
  echo "<tr><td class='td_head' align='left'>Edit</td></tr>";
- echo "<tr><td class='td_e'>Firstname* </td><td><input name='firstname' type='text' style='width:95%' value='".$firstname."' disabled/></td></tr>";
- echo "<tr><td class='td_e'>Lastname* </td><td><input name='lastname' type='text' style='width:95%' value='".$lastname."' disabled/></td></tr>";
- echo "<tr><td class='td_e'>Birthday* </td><td><input name='date_of_birth' style='width:95%' type='text' value='".$date_of_birth."' disabled/></td></tr>";
- echo "<tr><td class='td_e'>Zip* </td><td><input name='zip' style='width:95%' type='text' value='".$zip."' disabled/></td></tr>";
- echo "<tr><td class='td_e'>City* </td><td><input name='city' style='width:95%' value='".$city."' type='text' disabled/></td></tr>";
- echo "<tr><td class='td_e'>Street* </td><td><input name='street' style='width:95%' value='".$street."' type='text' disabled/></td></tr>";
- echo "<tr><td class='td_e'>Number* </td><td><input name='number' style='width:95%' type='text' value='".$number."' disabled/></td></tr>";
- echo "<tr><td class='td_e'>Telephone* </td><td><input name='tel' style='width:95%' value='".$tel."' type='text' disabled/></td></tr>";
- echo "<tr><td class='td_e'>Email* </td><td><input name='mail' style='width:95%' value='".$mail."' type='text' disabled/></td></tr>";
+ if ($session_id == 3) {
+	 echo "<tr><td class='td_e'>Firstname* </td><td><input name='firstname' type='text' style='width:95%' value='".$firstname."' disabled/></td></tr>";
+	 echo "<tr><td class='td_e'>Lastname* </td><td><input name='lastname' type='text' style='width:95%' value='".$lastname."' disabled/></td></tr>";
+	 echo "<tr><td class='td_e'>Birthday* </td><td><input name='date_of_birth' style='width:95%' type='text' value='".$date_of_birth."' disabled/></td></tr>";
+	 echo "<tr><td class='td_e'>Zip* </td><td><input name='zip' style='width:95%' type='text' value='".$zip."' disabled/></td></tr>";
+	 echo "<tr><td class='td_e'>City* </td><td><input name='city' style='width:95%' value='".$city."' type='text' disabled/></td></tr>";
+	 echo "<tr><td class='td_e'>Street* </td><td><input name='street' style='width:95%' value='".$street."' type='text' disabled/></td></tr>";
+	 echo "<tr><td class='td_e'>Number* </td><td><input name='number' style='width:95%' type='text' value='".$number."' disabled/></td></tr>";
+	 echo "<tr><td class='td_e'>Telephone* </td><td><input name='tel' style='width:95%' value='".$tel."' type='text' disabled/></td></tr>";
+	 echo "<tr><td class='td_e'>Email* </td><td><input name='mail' style='width:95%' value='".$mail."' type='text' disabled/></td></tr>";
 
- //input fields
- echo "<tr><td class='td_e'>Firstname </td><td><input name='firstname' type='text' style='width:95%' value='".$firstname."'/></td></tr>";
- echo "<tr><td class='td_e'>Lastname </td><td><input name='lastname' type='text' style='width:95%' value='".$lastname."'/></td></tr>";
- echo "<tr><td class='td_e'>Birthday </td><td><input name='date_of_birth' style='width:95%' type='text' value='".$date_of_birth."'/></td></tr>";
- echo "<tr><td class='td_e'>Zip </td><td><input name='zip' style='width:95%' type='text' value='".$zip."'/></td></tr>";
- echo "<tr><td class='td_e'>City </td><td><input name='city' style='width:95%' type='text' value='".$city."'/></td></tr>";
- echo "<tr><td class='td_e'>Street </td><td><input name='street' name='anzahl' style='width:95%' value='".$street."' type='text'/></td></tr>";
- echo "<tr><td class='td_e'>Number </td><td><input name='number' style='width:95%' type='text' value='".$number."'/></td></tr>";
- echo "<tr><td class='td_e'>Telephone </td><td><input name='tel' style='width:95%' value='".$tel."' type='text'/></td></tr>";
- echo "<tr><td class='td_e'>Email </td><td><input name='mail' style='width:95%' value='".$mail."' type='text'/></td></tr>";
- echo "<tr><td><input type='hidden' name='id' value='".$id."'/></td></tr>";
- echo "<tr><td></td><td><input value='Apply' name='update' class='btn_edit' type='submit'/></td></tr>";
- echo "<tr><td class='td_e' colspan='2'>* Press the orange arrow to fill this field</td></tr>";
+	 //input fields
+	 echo "<tr><td class='td_e'>Firstname </td><td><input name='firstname' type='text' style='width:95%' value='".$firstname."'/></td></tr>";
+	 echo "<tr><td class='td_e'>Lastname </td><td><input name='lastname' type='text' style='width:95%' value='".$lastname."'/></td></tr>";
+	 echo "<tr><td class='td_e'>Birthday </td><td><input name='date_of_birth' style='width:95%' type='text' value='".$date_of_birth."'/></td></tr>";
+	 echo "<tr><td class='td_e'>Zip </td><td><input name='zip' style='width:95%' type='text' value='".$zip."'/></td></tr>";
+	 echo "<tr><td class='td_e'>City </td><td><input name='city' style='width:95%' type='text' value='".$city."'/></td></tr>";
+	 echo "<tr><td class='td_e'>Street </td><td><input name='street' name='anzahl' style='width:95%' value='".$street."' type='text'/></td></tr>";
+	 echo "<tr><td class='td_e'>Number </td><td><input name='number' style='width:95%' type='text' value='".$number."'/></td></tr>";
+	 echo "<tr><td class='td_e'>Telephone </td><td><input name='tel' style='width:95%' value='".$tel."' type='text'/></td></tr>";
+ 	echo "<tr><td class='td_e'>Email </td><td><input name='mail' style='width:95%' value='".$mail."' type='text'/></td></tr>";
+	 echo "<tr><td><input type='hidden' name='id' value='".$id."'/></td></tr>";
+ 	 echo "<tr><td></td><td><input value='Apply' name='update' class='btn_edit' type='submit'/></td></tr>";
+	 echo "<tr><td class='td_e' colspan='2'>* Press the orange arrow to fill this field</td></tr>";
+ } else {
+ 	if ($session_id==2) {
+ 		echo "<tr><td class='td_e' colspan='2'>* Enter public key to use this function</td></tr>";
+ 	} else {
+		 if ($session_id==1) {
+		 	echo "<tr><td class='td_e' colspan='2'>* Enter private key to use this function</td></tr>";
+		 } else {
+		 	echo "<tr><td class='td_e' colspan='2'>* Enter public and private key to use this function</td></tr>";
+		 }
+	 }
+ }
  safeKey(); 
  echo "</table></form></div></td></tr>";
 
  //insert
  echo "<tr style='background-color:#303030'><td><div><form method='post' action='index.php'><table class='table_ani'>";
  echo "<tr><td class='td_head' align='left'>Add</td></tr>";
+ if ($session_id==3 || $session_id==1) {
  echo "<tr><td class='td_e'>Firstname </td><td><input name='firstname' type='text' style='width:95%' value='".$firstname."'/></td></tr>";
  echo "<tr><td class='td_e'>Lastname </td><td><input name='lastname' type='text' style='width:95%' value='".$lastname."'/></td></tr>";
  echo "<tr><td class='td_e'>Birthday </td><td><input name='date_of_birth' style='width:95%' type='text' value='".$date_of_birth."'/></td></tr>";
@@ -214,6 +228,9 @@ if(isset($_POST["update"]))
  echo "<tr><td class='td_e'>Telephone </td><td><input name='tel' style='width:95%' value='".$tel."' type='text'/></td></tr>";
  echo "<tr><td class='td_e'>Email </td><td><input name='mail' style='width:95%' value='".$mail."' type='text'/></td></tr>";
  echo "<tr><td></td><td><input value='Add' name='insert' class='btn_insert' type='submit'/></td></tr>";
+ } else {
+ 	echo "<tr><td class='td_e' colspan='2'>* Enter public key to use this function</td></tr>";
+ }
  safeKey();
  echo "</table></form></div></td></tr>";
  echo "<tr><td><div style='height: 500px; background-color: #303030;'></div></td></tr></table></div></th>";
