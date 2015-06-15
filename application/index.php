@@ -46,12 +46,10 @@ if (isset($_POST['delete_key_pub'])) {
 if (isset($_SESSION['key_pub']['ind_part'])) {
 	$e = intval($_SESSION['key_pub']['ind_part']);
 	$N = intval($_SESSION['key_pub']['N_part']);
-	echo "PublicKey: ".$e."<br>";
 }
 if (isset($_SESSION['key_priv']['ind_part'])) {
 	$d = intval($_SESSION['key_priv']['ind_part']);
 	$N = intval($_SESSION['key_priv']['N_part']);
-	echo "PrivatKey: ".$d."<br>";
 }
 
 //permission
